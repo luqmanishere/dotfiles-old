@@ -10,4 +10,4 @@ set SPACEFISH_DATE_SHOW true
 # aliases
 alias dotdrop="/home/luqman/dotfiles/dotdrop.sh --cfg=/home/luqman/dotfiles/config.yaml"
 
-alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias config="/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME"
