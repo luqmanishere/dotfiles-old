@@ -68,3 +68,7 @@ default_height = 30
 [[custom_plugins]]
   name = "dracula/vim"
   merged = 0
+
+[[custom_plugins]]
+  name = "liuchengxu/vista.vim"
+  merged = 0
