@@ -24,7 +24,7 @@
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
     autocomplete_method = "coc"
-    disabled_plugins = ["clang_complete"]
+    disabled_plugins = ["clang_complete","delimitMate","octol/vim-cpp-enhanced-highlight"]
     bootstrap_after = "autoneoformat#after"
 
 # Enable autocomplete layer
@@ -56,6 +56,7 @@ default_height = 30
 
 [[layers]]
   name = "lang#c"
+  enable_clang_syntax_highlight = false
 
 [[layers]]
   name = "lang#extra"
@@ -72,3 +73,10 @@ default_height = 30
 [[custom_plugins]]
   name = "liuchengxu/vista.vim"
   merged = 0
+
+[[custom_plugins]]
+  name = "jiangmiao/auto-pairs"
+  merged = 0
+
+[[custom_plugins]]
+  name = "jackguo380/vim-lsp-cxx-highlight"
