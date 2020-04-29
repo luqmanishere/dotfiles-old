@@ -4,7 +4,7 @@
 
 # explicitly needed when launching with bash -c from Windows
 export DISPLAY=:0
-#export LIBGL_ALWAYS_INDIRECT=0
+export LIBGL_ALWAYS_INDIRECT=0
 #source ~/.bashrc
 #xrandr --dpi 279
 i3

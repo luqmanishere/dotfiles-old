@@ -4,5 +4,5 @@
 ' You may need to change this to reflect your VcXsrv install path as well as screen resolution.
 
 Set shell = CreateObject("WScript.Shell" ) 
-shell.Run """C:\Program Files\VcXsrv\vcxsrv.exe"" :0 -screen 0 @1 -nodecoration -wgl"	
+shell.Run """C:\Program Files\VcXsrv\vcxsrv.exe"" :0 -screen 0 @1 -nodecoration -nowgl"	
 shell.Run "arch run ""~/.scripts/wlaunch""", 0

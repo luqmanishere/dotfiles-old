@@ -108,3 +108,5 @@ alias dotdrop='/home/luqman/dotfiles/dotdrop.sh --cfg=/home/luqman/dotfiles/conf
 task list
 
 source ~/.zoxide.plugin.zsh
+
+source /home/luqman/.config/broot/launcher/bash/br
