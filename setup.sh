@@ -6,4 +6,6 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 config config --local status.showUntrackedFiles no
 
+config submodule update --init --recursive
+
 ln -s -f .tmux/.tmux.conf
