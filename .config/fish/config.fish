@@ -1,5 +1,5 @@
 # Variables
-set -gx PATH $HOME/bin /usr/local/bin $HOME/.local/bin $HOME/.cargo/bin /snap/bin $PATH
+set -gx PATH $HOME/.nodenv/bin $HOME/.rbenv/bin $HOME/bin /usr/local/bin $HOME/.local/bin $HOME/.cargo/bin /snap/bin $PATH
 set -gx EDITOR nvim
 set -gx LFS /mnt/lfs
 set -gx PROJECT_PATHS ~/projects
@@ -15,3 +15,5 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME"
 
 alias ls="/usr/bin/exa"
 
+status --is-interactive; and rbenv init - | source
+status --is-interactive; and source (nodenv init -|psub)
