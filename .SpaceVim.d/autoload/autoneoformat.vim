@@ -12,6 +12,7 @@ function! autoneoformat#after() abort
 
   set foldmethod=indent
   set noswapfile
+  let g:airline_theme='nord'
   let g:coc_global_extensions = [
       \ 'coc-markdownlint',
       \ 'coc-spell-checker',

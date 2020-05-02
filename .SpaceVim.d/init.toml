@@ -61,10 +61,15 @@ default_height = 30
 [[layers]]
   name = "lang#extra"
 
+[[layers]]
+  name = "core#statusline"
+  enable = false
 
 [[layers]]
   name = "fzf"
 
+[[layers]]
+  name = "colorscheme"
 
 [[custom_plugins]]
   name = "dracula/vim"
@@ -82,5 +87,3 @@ default_height = 30
   name = "jackguo380/vim-lsp-cxx-highlight"
 
 
-[[custom_plugins]]
-  name = "arcticicestudio/nord-vim"
