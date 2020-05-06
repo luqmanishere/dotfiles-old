@@ -9,7 +9,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/i3bar]
-dpi = 279
+dpi = 192
 width = 100%
 height = 60
 ;#25
