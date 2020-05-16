@@ -24,7 +24,7 @@
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
     autocomplete_method = "coc"
-    disabled_plugins = ["clang_complete","delimitMate","octol/vim-cpp-enhanced-highlight"]
+    disabled_plugins = ["clang_complete","delimitMate","l/vim-cpp-enhanced-highlight"]
     bootstrap_after = "autoneoformat#after"
 
 # Enable autocomplete layer
@@ -71,6 +71,10 @@ default_height = 30
 [[layers]]
   name = "colorscheme"
 
+[[layers]]
+  name = "lang#rust"
+  format-autosave = 1
+
 [[custom_plugins]]
   name = "dracula/vim"
   merged = 0
@@ -87,3 +91,5 @@ default_height = 30
   name = "jackguo380/vim-lsp-cxx-highlight"
 
 
+[[custom_plugins]]
+  name = "vimwiki/vimwiki"

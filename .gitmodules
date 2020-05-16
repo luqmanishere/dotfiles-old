@@ -1,3 +1,9 @@
 [submodule ".tmux"]
 	path = .tmux
 	url = https://github.com/luqmanulhakim11/.tmux.git
+[submodule "/home/luqman/.config/polybar-nord"]
+	path = /home/luqman/.config/polybar-nord
+	url = https://github.com/Yucklys/polybar-nord-theme
+[submodule "/home/luqman/.emacs.d"]
+	path = /home/luqman/.emacs.d
+	url = https://github.com/syl20bnr/spacemacs
