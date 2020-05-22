@@ -1,0 +1,20 @@
+#!/bin/sh
+
+system_type=$(uname -s)
+
+cd $HOME
+
+alias config="git --git-dir='$HOME/dotfiles.git' --work-tree=$HOME"
+
+echo "Installing SpaceVim"
+
+curl -sLf https://spacevim.org/install.sh | bash
+
+echo "Updating submodules"
+yadm submodule update --init --recursive
+
+ln -s -f .tmux/.tmux.conf $HOME/.tmux.conf
+
+yadm decrypt
+
+yadm remote set-url origin "git@gitlab.com:luqmanulhakim11/dotfiles.git"
