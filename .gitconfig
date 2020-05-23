@@ -1,3 +1,7 @@
 [user]
 	email = saya789.mn@gmail.com
 	name = Luqmanul Hakim
+
+[merge]
+  ff = no
+  commit = no
