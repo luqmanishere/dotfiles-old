@@ -1,141 +1,267 @@
-[colors]
-background = #cc000000
-background-alt = #cc000000
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #268bd2
-; nice orange: #ffb52a
-secondary = #e60053
-alert = #bd2c40
+[nordcolors]
+nord0 = #2E3440
+nord1 = #3B4252
+nord2 = #434c5e
+nord3 = #4c566a
+nord4 = #d8dee9
+nord5 = #e5e9f0
+nord6 = #eceff4
+nord7 = #8fbcbb
+nord8 = #88c0d0
+nord9 = #81a1c1
+nord10 = #5e81ac
+nord11 = #bf616a
+nord12 = #d08770
+nord13 = #ebcb8b
+nord14 = #a3be8c
+nord15 = #b48ead
 
-[bar/i3bar]
-dpi = 192
-width = 100%
-height = 60
-;#25
-radius = 0.0
-fixed-center = true
+[module/battery]
+type = internal/battery
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+full-at = 95
 
-line-size = 8
-line-color = #268bd2
+; ls -l /sys/class/power_supply
+battery = BAT0
+adapter = AC
 
-border-size = 0
-border-top-size = ${bar/i3bar.line-size}
-border-color = ${colors.background}
+; polling
+poll-interval = 5
 
-padding-left = 1
-padding-right = 2
+; Charging
+format-charging = <animation-charging>  <label-charging>
+label-charging = %percentage%% 
 
-module-margin-left = 1
-module-margin-right = 1
+; discharge
+format-discharging = <ramp-capacity>  <label-discharging>
+label-discharging = %percentage%% 
 
-font-0 = fixed:normal:pixelsize=10
+; Ramp
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
-modules-left = i3
-modules-center = xwindow
-modules-right = filesystem cpu memory
-
-; tray probably looks terrible but I don't have any apps on my tray to see it
-tray-position = left
-tray-padding = 2
-tray-transparent = false
-tray-background = #000
-
-[module/xwindow]
-type = internal/xwindow
-label = %title%
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %free%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
-label-mounted-underline = #f00
+; Charging animation
+animation-charging-0 = 
+animation-charging-0-foreground = ${nordcolors.nord11}
+animation-charging-1 = 
+animation-charging-1-foreground = ${nordcolors.nord12}
+animation-charging-2 = 
+animation-charging-2-foreground = ${nordcolors.nord13}
+animation-charging-3 = 
+animation-charging-3-foreground = ${nordcolors.nord14}
+animation-charging-4 = 
+animation-charging-4-foreground = ${nordcolors.nord15}
+; Framerate in milliseconds
+animation-charging-framerate = 750
 
 [module/bspwm]
 type = internal/bspwm
 
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
 
-label-occupied = %index%
+; workspaces
+ws-icon-0 = terminal;
+ws-icon-1 = code;
+ws-icon-2 = browser;
+ws-icon-3 = comms;
+ws-icon-4 = misc;
+ws-icon-default = 
+
+enable-click = true
+
+pin-workspaces = true
+
+; Display format
+format = <label-state> 
+
+; Focused
+label-focused = %icon%
+label-focused-font = 2
+label-focused-foreground = ${nordcolors.nord7}
+label-focused-background = ${nordcolors.nord3} 
+label-focused-overline = ${nordcolors.nord9}
+
+; Occupied
+label-occupied = %icon%
+label-occupied-font = 2
+label-occupied-foreground = ${nordcolors.nord10}
+label-occupied-background = ${nordcolors.nord2}
+
+; Urgent
+label-urgent = %icon%
+label-urgent-font = 2
+label-urgent-foreground = ${nordcolors.nord11}
+
+; Label for empty workspaces
+label-empty =
+
+; Seperator
+label-focused-padding = 2
 label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
-
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline = ${colors.primary}
-label-focused-padding = 2
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 2
-
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${colors.alert}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${colors.background-alt}
-label-urgent-padding = 2
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #ffb52a
-label = %percentage%%
+
+; update interval
+interval = 1
+
+; Display format
+format = <label> <ramp-coreload>
+
+; Label format
+label =  %percentage%%
+label-foreground = ${nordcolors.nord13}
+
+; Per-core ramps
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+[module/title]
+type = internal/xwindow
+
+; Format
+format = <label>
+format-padding = 4
+
+label = %title%
+label-maxlen = 30
+
+label-empty = Hello BSPWM!
 
 [module/memory]
 type = internal/memory
-interval = 2
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #00f900
-;#4bffdc
-label = %gb_used%
 
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = xor
-;compositing-border = over
+;Format
+;format = <label> <ramp-used>
+
+;Label
+label =  %percentage_used%%
+
+[module/date]
+type = internal/date
+
+format = <label>
+label =  %date%  %time%
+
+date = %Y-%m-%d%
+; Optional time format
+time = %H:%M
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Format
+format-volume = <ramp-volume> <label-volume>
+format-muted = <label-muted>
+
+; Label muted
+label-muted = 婢 muted
+label-muted-foreground = ${nordcolors.nord11}
+
+; Ramp volume
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+
+click-right = pavucontrol &
+
+[module/network]
+type = internal/network
+
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`
+; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
+interface = enp0s3
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3.0
+
+; Test connectivity every Nth update
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+; Default: 0
+;ping-interval = 3
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate
+; Default: false
+accumulate-stats = true
+
+unknown-as-up = true
+
+; Format
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+; Connected
+label-connected =  %upspeed%  %downspeed%
+label-connected-foreground = ${nordcolors.nord14}
+
+; Disconnected
+label-disconnected = disconnected
+label-disconnected-foreground = ${nordcolors.nord11}
+
+[bar/top]
+monitor = 
+monitor-fallback = DP-1
+offset-x = 5%
+offset-y = 1%
+bottom = false
+height = 3%
+width = 90%
+padding = 2
+fixed-center = true
+wm-name = bspwm
+dpi = 192
+enable-ipc = true
+
+foreground = ${nordcolors.nord4}
+
+overline-size = 4
+underline-size = 4
+
+radius-top = 12
+radius-bottom = 12
+
+; Number of spaces to add before/after each module
+module-margin-left = 1
+module-margin-right = 1
+
+wm-restack = bspwm
+modules-left = date bspwm
+modules-center = title
+modules-right = pulseaudio network cpu battery memory
+
+font-0 = "FiraCode Nerd Font:size=12:style=Regular;4"
+font-1 = "FiraCode Nerd Font:size=20:style=Regular;3"
+
+background = ${nordcolors.nord1}
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-bottom = 0
+margin-top = 10
 
-; vim:ft=dosini
+
