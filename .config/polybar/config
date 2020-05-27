@@ -62,12 +62,12 @@ type = internal/bspwm
 
 
 ; workspaces
-ws-icon-0 = terminal;
+ws-icon-0 = terminal;
 ws-icon-1 = code;
-ws-icon-2 = browser;
-ws-icon-3 = comms;
-ws-icon-4 = misc;
-ws-icon-default = 
+ws-icon-2 = browser;龜
+ws-icon-3 = comms;
+ws-icon-4 = misc;
+ws-icon-default = 
 
 enable-click = true
 
@@ -78,24 +78,21 @@ format = <label-state>
 
 ; Focused
 label-focused = %icon%
-label-focused-font = 2
 label-focused-foreground = ${nordcolors.nord7}
 label-focused-background = ${nordcolors.nord3} 
 label-focused-overline = ${nordcolors.nord9}
 
 ; Occupied
 label-occupied = %icon%
-label-occupied-font = 2
 label-occupied-foreground = ${nordcolors.nord10}
 label-occupied-background = ${nordcolors.nord2}
 
 ; Urgent
 label-urgent = %icon%
-label-urgent-font = 2
 label-urgent-foreground = ${nordcolors.nord11}
 
 ; Label for empty workspaces
-label-empty =
+label-empty = %icon%
 
 ; Seperator
 label-focused-padding = 2
@@ -112,7 +109,7 @@ interval = 1
 format = <label> <ramp-coreload>
 
 ; Label format
-label =  %percentage%%
+label =  %percentage%%
 label-foreground = ${nordcolors.nord13}
 
 ; Per-core ramps
@@ -145,19 +142,19 @@ type = internal/memory
 ;format = <label> <ramp-used>
 
 ;Label
-label =  %percentage_used%%
+label =  %percentage_used%%
 
 [module/date]
 type = internal/date
 
 format = <label>
-label =  %date%  %time%
+label =  %date%  %time%
 
 date = %Y-%m-%d%
 ; Optional time format
 time = %H:%M
 
-[module/pulseaudio]
+[module/sound]
 type = internal/pulseaudio
 
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
@@ -177,13 +174,13 @@ format-volume = <ramp-volume> <label-volume>
 format-muted = <label-muted>
 
 ; Label muted
-label-muted = 婢 muted
+label-muted =  muted
 label-muted-foreground = ${nordcolors.nord11}
 
 ; Ramp volume
-ramp-volume-0 = 奄
-ramp-volume-1 = 奔
-ramp-volume-2 = 墳
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
 click-right = pavucontrol &
 
@@ -217,7 +214,7 @@ format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 
 ; Connected
-label-connected =  %upspeed%  %downspeed%
+label-connected =  %upspeed%  %downspeed%
 label-connected-foreground = ${nordcolors.nord14}
 
 ; Disconnected
@@ -253,10 +250,13 @@ module-margin-right = 1
 wm-restack = bspwm
 modules-left = date bspwm
 modules-center = title
-modules-right = pulseaudio network cpu battery memory
+modules-right = sound network cpu battery memory
 
-font-0 = "FiraCode Nerd Font:size=12:style=Regular;4"
-font-1 = "FiraCode Nerd Font:size=20:style=Regular;3"
+font-0 = "Fira Code:size=12:style=Regular;4"
+font-1 = "Fira Code:size=20:style=Regular;3"
+font-2 = "Font Awesome 5 Free:size=15:style=Regular;1"
+font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
+font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
 
 background = ${nordcolors.nord1}
 
