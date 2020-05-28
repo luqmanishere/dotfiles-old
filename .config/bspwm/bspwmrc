@@ -21,6 +21,7 @@ bspc rule -a Screenkey manage=off
 bspc rule -a URxvt:urxvt_keys_help state=floating
 
 $HOME/.config/polybar/launch.sh
+$HOME/.config/dunst/launch.sh
 feh --bg-scale ~/.config/wallpaper/nord-arch-16k.png &
 picom --config ~/.config/picom/picom.conf &
 xautolock -time 5 -locker "betterlockscreen -l blur" \
