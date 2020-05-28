@@ -21,7 +21,7 @@ super + Escape
 
 # lockscreen
 alt + shift + x
-  betterlockscreen -l blur
+	xautolock -locknow
 
 # quick launch apps
 alt + x ; {q,w,e,a,s,d}
