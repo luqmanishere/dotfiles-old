@@ -22,4 +22,7 @@ bspc rule -a URxvt:urxvt_keys_help state=floating
 
 $HOME/.config/polybar/launch.sh
 feh --bg-scale ~/.config/wallpaper/nord-arch-16k.png &
-picom --config ~/.config/picom/picom.conf
+picom --config ~/.config/picom/picom.conf &
+xautolock -time 5 -locker "betterlockscreen -l blur" \
+  -notify 30 \
+  -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &

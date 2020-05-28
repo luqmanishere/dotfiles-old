@@ -190,7 +190,7 @@ type = internal/network
 ; Name of the network interface to display. You can get the names of the
 ; interfaces on your machine with `ip link`
 ; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
-interface = enp0s3
+interface = wlp3s0b1
 
 ; Seconds to sleep between updates
 ; Default: 1
@@ -221,6 +221,11 @@ label-connected-foreground = ${nordcolors.nord14}
 label-disconnected = disconnected
 label-disconnected-foreground = ${nordcolors.nord11}
 
+[module/updates-pacman-aurhelper]
+type = custom/script
+exec = ~/.config/polybar/scripts/updates-pacman-aurhelper.sh
+interval = 600
+
 [bar/top]
 monitor = 
 monitor-fallback = DP-1
@@ -249,7 +254,7 @@ module-margin-right = 1
 
 wm-restack = bspwm
 modules-left = date bspwm
-modules-center = title
+modules-center = 
 modules-right = sound network cpu battery memory
 
 font-0 = "Fira Code:size=12:style=Regular;4"
@@ -259,6 +264,46 @@ font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
 font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
 
 background = ${nordcolors.nord1}
+
+[bar/bottom]
+monitor = 
+monitor-fallback = DP-1
+offset-x = 5%
+offset-y = 1%
+bottom = true
+height = 3%
+width = 90%
+padding = 2
+fixed-center = true
+wm-name = bspwm
+dpi = 192
+enable-ipc = true
+
+foreground = ${nordcolors.nord4}
+
+overline-size = 4
+underline-size = 4
+
+radius-top = 12
+radius-bottom = 12
+
+; Number of spaces to add before/after each module
+module-margin-left = 1
+module-margin-right = 1
+
+wm-restack = bspwm
+modules-left = 
+modules-center = title
+modules-right = updates-pacman-aurhelper
+
+font-0 = "Fira Code:size=12:style=Regular;4"
+font-1 = "Fira Code:size=20:style=Regular;3"
+font-2 = "Font Awesome 5 Free:size=15:style=Regular;1"
+font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
+font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
+
+background = ${nordcolors.nord1}
+
 
 [global/wm]
 margin-bottom = 0
