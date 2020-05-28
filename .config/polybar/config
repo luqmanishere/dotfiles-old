@@ -190,7 +190,7 @@ type = internal/network
 ; Name of the network interface to display. You can get the names of the
 ; interfaces on your machine with `ip link`
 ; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
-interface = enp0s3
+interface = wlp3s0b1
 
 ; Seconds to sleep between updates
 ; Default: 1
@@ -232,7 +232,7 @@ width = 90%
 padding = 2
 fixed-center = true
 wm-name = bspwm
-dpi = 192
+dpi = 96
 enable-ipc = true
 
 foreground = ${nordcolors.nord4}
