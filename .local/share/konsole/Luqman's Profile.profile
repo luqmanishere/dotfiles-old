@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 BoldIntense=false
 ColorScheme=nord
-Font=Cascadia Code PL,13,-1,5,50,0,0,0,0,0
+Font=FiraCode Nerd Font,13,-1,5,57,0,0,0,0,0,Medium
 UseFontLineChararacters=false
 
 [General]

@@ -19,6 +19,14 @@ alt + @space
 super + Escape
 	pkill -USR1 -x sxhkd
 
+# lockscreen
+alt + shift + x
+  betterlockscreen -l blur
+
+# quick launch apps
+alt + x ; {q,w,e,a,s,d}
+	{kitty,konsole,,firefox,code,}
+
 #
 # bspwm hotkeys
 #
@@ -42,6 +50,14 @@ alt + y
 # swap the current node and the biggest node
 alt + g
 	bspc node -s biggest
+
+# Make split ratios equal
+super + equal
+ bspc node @/ --equalize
+
+# Make split ratios balanced
+super + minus
+ bspc node @/ --balance
 
 #
 # state/flags
