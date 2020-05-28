@@ -226,6 +226,15 @@ type = custom/script
 exec = ~/.config/polybar/scripts/updates-pacman-aurhelper.sh
 interval = 600
 
+[module/taskwarrior]
+interval = 30
+type = custom/script
+exec = $HOME/.config/polybar/scripts/task_polybar.sh
+format = <label>
+format-prefix = " "
+label-maxlen = 50
+click-left = task "$((`cat /tmp/tw_polybar_id`))" done
+
 [bar/top]
 monitor = 
 monitor-fallback = DP-1
@@ -292,7 +301,7 @@ module-margin-left = 1
 module-margin-right = 1
 
 wm-restack = bspwm
-modules-left = 
+modules-left = taskwarrior
 modules-center = title
 modules-right = updates-pacman-aurhelper
 

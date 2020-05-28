@@ -27,6 +27,10 @@ alt + shift + x
 alt + x ; {q,w,e,a,s,d}
 	{kitty,konsole,,firefox,code,}
 
+# quick launch apps
+alt + x ; {q,w,e,a,s,d}
+	{kitty,konsole,,firefox,code,}
+
 #
 # bspwm hotkeys
 #
