@@ -1,3 +1,4 @@
 .ssh/general*
 .ssh/git*
 .task/freecinc*
+.taskrc
