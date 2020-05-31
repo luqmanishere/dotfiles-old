@@ -246,7 +246,7 @@ width = 90%
 padding = 2
 fixed-center = true
 wm-name = bspwm
-dpi = 96
+dpi = 192
 enable-ipc = true
 
 foreground = ${nordcolors.nord4}
@@ -285,7 +285,7 @@ width = 90%
 padding = 2
 fixed-center = true
 wm-name = bspwm
-dpi = 96
+dpi = 192
 enable-ipc = true
 
 foreground = ${nordcolors.nord4}
