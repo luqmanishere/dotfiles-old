@@ -19,11 +19,14 @@ bspc rule -a firefox desktop='^3'
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a URxvt:urxvt_keys_help state=floating
+bspc rule -a TelegramDeskop state=floating
+bspc rule -a 'Minecraft* 1.15.2' state=floating
 
 $HOME/.config/polybar/launch.sh
 $HOME/.config/dunst/launch.sh
 feh --bg-scale ~/.config/wallpaper/nord-arch-16k.png &
 picom --config ~/.config/picom/picom.conf &
-xautolock -time 5 -locker "betterlockscreen -l blur" \
-  -notify 30 \
-  -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
+xautolock -time 10 -locker "betterlockscreen -l blur" \
+  -notify 300 \
+  -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 5 minutes' ; sleep 20 ; xset \
+  dpms force off" &

@@ -10,6 +10,11 @@ function! autoneoformat#after() abort
   autocmd BufWritePre * undojoin | Neoformat
   augroup END
 
+  augroup vimrc_autocmds
+  autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
+  autocmd BufEnter * match OverLength /\%100v.*/
+  augroup END
+
   set foldmethod=indent
   set noswapfile
   let g:airline_theme='nord'
@@ -30,5 +35,6 @@ function! autoneoformat#after() abort
   let g:cpp_class_decl_highlight = 1
   let g:cpp_posix_standard = 1
   let g:cpp_concepts_highlight = 1
+  set tw=100
 
 endfunction

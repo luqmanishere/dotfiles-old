@@ -1,0 +1,9 @@
+set folder=~/.mail/office
+set spoolfile=~/.mail/office/Inbox
+set header_cache=~/.cache/mutt
+
+macro index G "!mbsync -a^M" "Update through mbsync"
+
+set move = no
+
+auto_view text/html
