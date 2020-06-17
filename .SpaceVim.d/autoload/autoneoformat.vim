@@ -1,18 +1,20 @@
 function! autoneoformat#before() abort
-  
+ 
 endfunction
 
 
 function! autoneoformat#after() abort
 
-  augroup fmt
+  let g:nord_italic = 1
+  let g:nord_italic_comments = 1
+   augroup fmt
   autocmd!
   autocmd BufWritePre * undojoin | Neoformat
   augroup END
 
   augroup vimrc_autocmds
   autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
-  autocmd BufEnter * match OverLength /\%100v.*/
+  autocmd BufEnter * match OverLength /\%101v.*/
   augroup END
 
   set foldmethod=indent
@@ -36,5 +38,13 @@ function! autoneoformat#after() abort
   let g:cpp_posix_standard = 1
   let g:cpp_concepts_highlight = 1
   set tw=100
+
+  " bye arrow keys
+  noremap <Up> <NOP>
+  noremap <Down> <NOP>
+  noremap <Left> <NOP>
+  noremap <Right> <NOP>
+
+  au BufRead /tmp/mutt-* set tw=72
 
 endfunction

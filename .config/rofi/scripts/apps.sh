@@ -6,6 +6,7 @@
 ## music : @adi1090x
 
 rofi_command="rofi -theme themes/apps.rasi"
+terminal_command="kitty -o initial_window_width=78c -o initial_window_height=78c --class kitfloat"
 
 # Links
 terminal=""
@@ -21,19 +22,19 @@ options="$terminal\n$files\n$editor\n$browser\n$music\n$settings"
 chosen="$(echo -e "$options" | $rofi_command -p "Most Used" -dmenu -selected-row 0)"
 case $chosen in
     $terminal)
-        termite &
+        $terminal_command &
         ;;
     $files)
-        thunar &
+        $terminal_command ranger &
         ;;
     $editor)
-        geany &
+        $terminal_command nvim &
         ;;
     $browser)
         firefox &
         ;;
     $music)
-        lxmusic &
+        $terminal_command ncmpcpp &
         ;;
     $settings)
         xfce4-settings-manager &

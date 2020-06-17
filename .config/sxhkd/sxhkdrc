@@ -39,9 +39,6 @@ XF86AudioMute
 alt + x
   $HOME/.config/rofi/bin/apps.sh
 
-# change volume
-XF86AudioRaiseVolume
-
 #
 # bspwm hotkeys
 #
@@ -158,4 +155,14 @@ super + {Left,Down,Up,Right}
 
 alt + r
   bspc node @/ -R 90
+
+
+
+# hide window
+super + v
+  bspc node -g hidden
+
+# unhide window
+super + shift + v
+  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 

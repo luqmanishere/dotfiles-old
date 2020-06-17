@@ -257,7 +257,7 @@ port = 6600
 ; password = mysecretpassword
 
 ; Display format
-format-online = <icon-prev> <icon-stop> <toggle> <icon-next> <label-time> <label-song>
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next> <label-time>
 format-playing = ${self.format-online}
 format-paused = ${self.format-online}
 format-stopped = ${self.format-online}
@@ -354,7 +354,7 @@ font-2 = "Font Awesome 5 Free:size=15:style=Regular;1"
 font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
 font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
 
-background = ${nordcolors.nord1}
+background = ${nordcolors.nord3}
 
 [bar/bottom]
 monitor = 

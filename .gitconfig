@@ -4,7 +4,6 @@
 
 [merge]
   ff = no
-  commit = no
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
