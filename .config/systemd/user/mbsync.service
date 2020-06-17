@@ -1,0 +1,7 @@
+[Unit]
+Description=Mailbox synchronization service
+OnFailure=mbsync-noti.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mbsync -Va
