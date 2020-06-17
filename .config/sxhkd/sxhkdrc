@@ -9,11 +9,11 @@ super + F1
 
 # terminal emulator
 alt + Return
-	konsole
+	kitty
 
 # program launcher
 alt + @space
-	rofi -show run
+  rofi -modi "run,drun" -show drun -display-run 'ﰌ' -display-drun 'ﰌ' -terminal kitty -theme $HOME/.local/share/rofi/nord.rasi
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -23,21 +23,29 @@ super + Escape
 alt + shift + x
 	xautolock -locknow
 
-# quick launch apps
-alt + x ; {q,w,e,a,s,d}
-	{kitty,konsole,,firefox,code,}
+# change backlight {add,subtract}
+{XF86MonBrightnessUp,XF86MonBrightnessDown}
+  $HOME/.config/sxhkd/light.sh {-A 5, -U 5}
 
-# quick launch apps
-alt + x ; {q,w,e,a,s,d}
-	{kitty,konsole,,firefox,code,}
+# change volume {add, subtract}
+{XF86AudioRaiseVolume,XF86AudioLowerVolume}
+	pactl set-sink-mute 0 false ; pactl set-sink-volume 0 {+5%, -5%}
+
+# instant mute
+XF86AudioMute
+	pactl set-sink-mute 0 true
+
+# quick launcher
+alt + x
+  $HOME/.config/rofi/bin/apps.sh
 
 #
 # bspwm hotkeys
 #
 
-# quit/restart bspwm
+# powermenu/restart bspwm
 super + alt + {q,r}
-	bspc {quit,wm -r}
+	{$HOME/.config/rofi/bin/powermenu.sh,bspc wm -r}
 
 # close and kill
 alt + {_,shift + }w
@@ -147,4 +155,14 @@ super + {Left,Down,Up,Right}
 
 alt + r
   bspc node @/ -R 90
+
+
+
+# hide window
+super + v
+  bspc node -g hidden
+
+# unhide window
+super + shift + v
+  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 

@@ -1,0 +1,116 @@
+######################################
+######### Global Options #############
+######################################
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+Sync All
+
+######################################
+######### Office Account #############
+######################################
+IMAPAccount office
+# Address to connect to
+Host outlook.office365.com
+User luqman@assb.io
+PassCmd "pass show 365/luqman/office"
+# To store the password in an encrypted file use PassCmd instead of Pass
+# PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+#
+# Use SSL
+SSLType IMAPS
+# The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+#CertificateFile ~/.cert/imap.gmail.com.pem
+#CertificateFile ~/.cert/Equifax_Secure_CA.pem
+
+# Remote Storage
+IMAPStore office-remote
+Account office
+
+# local storage
+MaildirStore office-local
+Path ~/.mail/office/
+Inbox ~/.mail/office/Inbox
+
+Channel office-inbox
+Master :office-remote:
+Slave  :office-local:Inbox
+
+Channel office-archive
+Master :office-remote:"Archive"
+Slave :office-local:Archive
+
+# Channel office-draft
+# Master :office-remote:"Drafts"
+# slave :office-remote:"Draft"
+
+Channel office-sent
+Master :office-remote:"Sent Items"
+slave  :office-local:"Sent"
+
+Channel office-trash
+Master :office-remote:"Deleted Items"
+slave  :office-local:Trash
+
+Channel office-junk
+Master :office-remote:"Junk Email"
+slave  :office-local:Junk
+
+# Include all channel in group
+Group office
+Channel office-inbox
+Channel office-archive
+Channel office-trash
+Channel office-sent
+# Channel office-draft
+Channel office-junk
+
+##########################################
+######### Gmail Dev1 Account #############
+##########################################
+IMAPAccount gmail-dev1
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+SSLType IMAPS
+Host imap.gmail.com
+User saya567.mn@gmail.com
+# Must be an application specific password, otherwise google will deny access.
+PassCmd "pass show Gmail/saya567/appspecific"
+# Throttle mbsync so we don't go over gmail's quota: OVERQUOTA error would
+# eventually be returned otherwise. For more details see:
+# https://sourceforge.net/p/isync/mailman/message/35458365/
+PipelineDepth 50
+
+MaildirStore gmail-dev1-local
+# The trailing "/" is important
+Path ~/.mail/gmail-dev1/
+Inbox ~/.mail/gmail-dev1/Inbox
+Subfolders Verbatim
+
+IMAPStore gmail-dev1-remote
+Account gmail-dev1
+
+Channel gmail-dev1-inbox
+Master :gmail-dev1-remote:"Inbox"
+Slave :gmail-dev1-local:Inbox
+
+Channel gmail-dev1-sent
+Master :gmail-dev1-remote:"Sent"
+Slave :gmail-dev1-local:Sent
+
+Channel gmail-dev1-draft
+Master :gmail-dev1-remote:"[Gmail]/Drafts"
+Slave :gmail-dev1-local:Drafts
+
+Channel gmail-dev1-trash
+Master :gmail-dev1-remote:"[Gmail]/Trash"
+Slave :gmail-dev1-local:Trash
+
+# Get all the gmail channels together into a group.
+Group gmail-dev1
+Channel gmail-dev1-inbox
+Channel gmail-dev1-sent
+Channel gmail-dev1-draft
+Channel gmail-dev1-trash

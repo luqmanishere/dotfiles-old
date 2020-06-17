@@ -14,3 +14,16 @@
 * master -> current used setup (hidpi)
 * hidpi -> hidpi setup
 * ndpi -> normal dpi setup
+
+### Configurations tracked
+
+* Kitty
+* Spacevim (neovim)
+* Gitconfig
+* Bspwm
+* Sxhkd
+* i3
+* picom
+* wallpapers
+* polybar
+* rofi

@@ -1,0 +1,29 @@
+
+set from = "saya567.mn@gmail.com"
+set sendmail = "/usr/bin/msmtp -a gmail-dev1"
+
+# Set folders
+set spoolfile = "+gmail-dev1/Inbox"
+set mbox = "+gmail-dev1/Archive"
+set postponed = "+gmail-dev1/Drafts"
+set record = "+gmail-dev1/Sent"
+set trash = "+gmail-dev1/Trash"
+
+color status magenta default
+
+macro index o "<shell-escape>mbsync gmail-dev1<enter>" "run mbsync to sync mail for this account"
+
+
+macro index,pager J \
+  "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
+  <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
+  <save-message>+gmail-dev1/Junk<enter>" \
+  "mark as read and move to junk folder"
+
+macro index,pager A \
+  "<save-message>+gmail-dev1/Archive<enter>"  \
+  "move message to the archive"
+
+macro index,pager I \
+  "<save-message>+gmail-dev1/Inbox<enter>"  \
+  "move message to the inbox"

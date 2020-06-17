@@ -16,14 +16,25 @@ nord13 = #ebcb8b
 nord14 = #a3be8c
 nord15 = #b48ead
 
+[module/light]
+type = custom/script
+exec = light -G
+interval = 10
+
+; Format
+format = <label>
+
+; Label output
+label =  %output%
+
 [module/battery]
 type = internal/battery
 
 full-at = 95
 
 ; ls -l /sys/class/power_supply
-battery = BAT0
-adapter = AC
+battery = BAT1
+adapter = ACAD
 
 ; polling
 poll-interval = 5
@@ -190,7 +201,7 @@ type = internal/network
 ; Name of the network interface to display. You can get the names of the
 ; interfaces on your machine with `ip link`
 ; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
-interface = wlp3s0b1
+interface = wlp6s0
 
 ; Seconds to sleep between updates
 ; Default: 1
@@ -235,6 +246,77 @@ format-prefix = " "
 label-maxlen = 50
 click-left = task "$((`cat /tmp/tw_polybar_id`))" done
 
+[module/mpd]
+type = internal/mpd
+
+
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+host = 127.0.0.1
+port = 6600
+; password = mysecretpassword
+
+; Display format
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next> <label-time>
+format-playing = ${self.format-online}
+format-paused = ${self.format-online}
+format-stopped = ${self.format-online}
+
+; Song display format
+label-song =  %artist% - %title%
+
+; Daemon offline format
+label-offline = 🎜 mpd is offline
+
+;icons
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-random = 
+icon-repeat = 
+
+; Used to display the state of random/repeat/repeatone/single
+; Only applies if <icon-[random|repeat|repeatone|single]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+; Only applies if <bar-progress> is used
+bar-progress-width = 10
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+
+
+[module/mpd-bar]
+type = internal/mpd
+
+
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+host = 127.0.0.1
+port = 6600
+; password = mysecretpassword
+
+; Display format
+format-online = <label-song> <bar-progress>
+format-playing = ${self.format-online}
+format-paused = ${self.format-online}
+format-stopped = ${self.format-online}
+
+label-song = 
+
+; Daemon offline format
+label-offline = 🎜 mpd is offline
+
+; Only applies if <bar-progress> is used
+bar-progress-width = 20
+bar-progress-indicator = |
+bar-progress-fill = -
+bar-progress-empty = ─
+
+
 [bar/top]
 monitor = 
 monitor-fallback = DP-1
@@ -246,7 +328,7 @@ width = 90%
 padding = 2
 fixed-center = true
 wm-name = bspwm
-dpi = 192
+dpi = 144
 enable-ipc = true
 
 foreground = ${nordcolors.nord4}
@@ -263,7 +345,7 @@ module-margin-right = 1
 
 wm-restack = bspwm
 modules-left = date bspwm
-modules-center = 
+modules-center = mpd
 modules-right = sound network cpu battery memory
 
 font-0 = "Fira Code:size=12:style=Regular;4"
@@ -272,7 +354,7 @@ font-2 = "Font Awesome 5 Free:size=15:style=Regular;1"
 font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
 font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
 
-background = ${nordcolors.nord1}
+background = ${nordcolors.nord3}
 
 [bar/bottom]
 monitor = 
@@ -285,7 +367,7 @@ width = 90%
 padding = 2
 fixed-center = true
 wm-name = bspwm
-dpi = 192
+dpi = 144
 enable-ipc = true
 
 foreground = ${nordcolors.nord4}
@@ -303,7 +385,7 @@ module-margin-right = 1
 wm-restack = bspwm
 modules-left = taskwarrior
 modules-center = title
-modules-right = updates-pacman-aurhelper
+modules-right = mpd-bar  light updates-pacman-aurhelper
 
 font-0 = "Fira Code:size=12:style=Regular;4"
 font-1 = "Fira Code:size=20:style=Regular;3"

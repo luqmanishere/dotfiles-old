@@ -1,0 +1,6 @@
+[Unit]
+Description=Mailbox failure notification
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/dunstify --urgency=critical "Mail Sync Failed" "Please check the service"

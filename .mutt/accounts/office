@@ -1,0 +1,28 @@
+set from = "luqman@assb.io"
+set sendmail = "/usr/bin/msmtp -a office"
+
+# Set folders
+set spoolfile = "+office/Inbox"
+set mbox = "+office/Archive"
+set postponed = "+office/Drafts"
+set record = "+office/Sent"
+set trash = "+office/Trash"
+
+color status cyan default
+
+macro index o "<shell-escape>mbsync office<enter>" "run mbsync to sync mail for this account"
+
+
+macro index,pager J \
+  "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
+  <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
+  <save-message>+office/Junk<enter>" \
+  "mark as read and move to junk folder"
+
+macro index,pager A \
+  "<save-message>+office/Archive<enter>"  \
+  "move message to the archive"
+
+macro index,pager I \
+  "<save-message>+office/Inbox<enter>"  \
+  "move message to the inbox"
