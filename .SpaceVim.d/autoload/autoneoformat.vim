@@ -5,8 +5,8 @@ endfunction
 
 function! autoneoformat#after() abort
 
-  let g:nord_italic = 1
-  let g:nord_italic_comments = 1
+  " let g:nord_italic = 1
+  " let g:nord_italic_comments = 1
    augroup fmt
   autocmd!
   autocmd BufWritePre * undojoin | Neoformat
@@ -19,7 +19,7 @@ function! autoneoformat#after() abort
 
   set foldmethod=indent
   set noswapfile
-  let g:airline_theme='nord'
+  let g:airline_theme='dracula'
   let g:coc_global_extensions = [
       \ 'coc-markdownlint',
       \ 'coc-python',
@@ -45,6 +45,6 @@ function! autoneoformat#after() abort
   noremap <Left> <NOP>
   noremap <Right> <NOP>
 
-  au BufRead /tmp/mutt-* set tw=72
+  inoremap kj <Esc>
 
 endfunction
