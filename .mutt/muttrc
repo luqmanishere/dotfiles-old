@@ -88,7 +88,7 @@ mailboxes =gmail-dev1/Inbox =gmail-dev1/Sent =gmail-dev1/Drafts =gmail-dev1/Tras
 
 # keybindings
 source ~/.mutt/bindings
-source ~/.mutt/colors
+source ~/.mutt/dracula.muttrc
 
 # by default, use mailbox
 set realname = "Luqmanul Hakim"
@@ -99,3 +99,5 @@ source ~/.mutt/accounts/office
 folder-hook office/* source ~/.mutt/accounts/office
 folder-hook gmail-dev1/* source ~/.mutt/accounts/gmail-dev1
 
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"

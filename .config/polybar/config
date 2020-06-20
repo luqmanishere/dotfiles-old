@@ -16,6 +16,19 @@ nord13 = #ebcb8b
 nord14 = #a3be8c
 nord15 = #b48ead
 
+[draculacolors]
+background = #282a36
+currentline = #44475a
+foreground = #f8f8f2
+comment = #6272a4
+cyan = #8be9fd
+green = #50fa7b
+orange = #ffb86c
+pink = #ff79c6
+purple = #bd93f9
+red = #ff5555
+yellow = #f1fa8c
+
 [module/light]
 type = custom/script
 exec = light -G
@@ -41,11 +54,22 @@ poll-interval = 5
 
 ; Charging
 format-charging = <animation-charging>  <label-charging>
+format-charging-background = ${draculacolors.comment}
 label-charging = %percentage%% 
 
 ; discharge
 format-discharging = <ramp-capacity>  <label-discharging>
+format-discharging-background = ${draculacolors.comment}
 label-discharging = %percentage%% 
+
+; Full
+format-full = <ramp-capacity> <label-full>
+format-full-background = ${draculacolors.comment}
+format-full-prefix = 
+format-full-prefix-foreground = ${draculacolors.comment}
+format-full-prefix-background = ${draculacolors.pink}
+format-full-prefix-font = 2
+label-full = %percentage%%
 
 ; Ramp
 ramp-capacity-0 = 
@@ -88,27 +112,27 @@ pin-workspaces = true
 format = <label-state> 
 
 ; Focused
-label-focused = %icon%
-label-focused-foreground = ${nordcolors.nord7}
-label-focused-background = ${nordcolors.nord3} 
-label-focused-overline = ${nordcolors.nord9}
+label-focused = %{F#282a36}%{T2}%{T-}%{B#6272a4}%{F-} %icon% %{T2}%{B-}%{F#6272a4}%{F-}%{T-}
+label-focused-foreground = 
+label-focused-background =  ${draculacolors.comment}
+label-focused-overline = 
 
 ; Occupied
-label-occupied = %icon%
-label-occupied-foreground = ${nordcolors.nord10}
-label-occupied-background = ${nordcolors.nord2}
+label-occupied = %{F#282a36}%{T2}%{T-}%{B-}%{F-} %icon% %{T2}%{B-}%{F#282a36}%{F-}%{T-}
+label-occupied-foreground = 
+label-occupied-background = 
 
 ; Urgent
-label-urgent = %icon%
-label-urgent-foreground = ${nordcolors.nord11}
+label-urgent = %{F#ff5555}%{T2}%{T-}%{B-}%{F-} %icon% %{T2}%{B-}%{F#ff5555}%{F-}%{T-}
+label-urgent-foreground = 
 
 ; Label for empty workspaces
-label-empty = %icon%
+label-empty = %{F#282a36}%{T2}%{T-}%{B-}%{F-} %icon% %{T2}%{B-}%{F#282a36}%{F-}%{T-}
 
 ; Seperator
-label-focused-padding = 2
-label-occupied-padding = 2
-label-empty-padding = 2
+label-focused-padding = 0
+label-occupied-padding = 0
+label-empty-padding = 0
 
 [module/cpu]
 type = internal/cpu
@@ -118,13 +142,20 @@ interval = 1
 
 ; Display format
 format = <label> <ramp-coreload>
+format-background = ${draculacolors.pink}
+format-foreground = ${draculacolors.currentline}
+format-prefix = 
+format-prefix-background = ${draculacolors.orange}
+format-prefix-font = 2
+format-prefix-foreground = ${draculacolors.pink}
 
 ; Label format
 label =  %percentage%%
-label-foreground = ${nordcolors.nord13}
+label-foreground = ${draculacolors.currentline}
 
 ; Per-core ramps
 ramp-coreload-spacing = 1
+ramp-coreload-foreground = ${draculacolors.currentline}
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
 ramp-coreload-2 = ▃
@@ -153,17 +184,24 @@ type = internal/memory
 ;format = <label> <ramp-used>
 
 ;Label
-label =  %percentage_used%%
+label = %{F-}  %percentage_used%% %{F-}
+label-background = ${draculacolors.comment}
 
 [module/date]
 type = internal/date
 
 format = <label>
-label =  %date%  %time%
+format-suffix = %{T2}
+format-suffix-background = ${draculacolors.background}
+format-suffix-foreground = ${draculacolors.green}
+format-background = ${draculacolors.green}
+format-foreground = ${draculacolors.currentline}
+label = %{F-}  %date%  %time%
 
 date = %Y-%m-%d%
 ; Optional time format
 time = %H:%M
+
 
 [module/sound]
 type = internal/pulseaudio
@@ -182,11 +220,21 @@ interval = 5
 
 ; Format
 format-volume = <ramp-volume> <label-volume>
+format-volume-background = ${draculacolors.orange}
+format-volume-prefix = 
+format-volume-prefix-font = 2
+format-volume-prefix-background = ${draculacolors.background}
+format-volume-prefix-foreground = ${draculacolors.orange}
 format-muted = <label-muted>
+format-muted-background = ${draculacolors.orange}
+format-muted-prefix = 
+format-muted-prefix-font = 2
+format-muted-prefix-background = ${draculacolors.background}
+format-muted-prefix-foreground = ${draculacolors.orange}
 
 ; Label muted
 label-muted =  muted
-label-muted-foreground = ${nordcolors.nord11}
+label-muted-foreground = ${draculacolors.red}
 
 ; Ramp volume
 ramp-volume-0 = 
@@ -221,16 +269,20 @@ accumulate-stats = true
 unknown-as-up = true
 
 ; Format
-format-connected = <label-connected>
-format-disconnected = <label-disconnected>
 
 ; Connected
-label-connected =  %upspeed%  %downspeed%
-label-connected-foreground = ${nordcolors.nord14}
+format-connected = %{F-} <label-connected>
+format-connected-background = ${draculacolors.orange}
+
+label-connected =  connected
+label-connected-foreground = ${draculacolors.currentline}
 
 ; Disconnected
+format-disconnected = %{F-} <label-disconnected>
+format-disconnected-background = ${draculacolors.orange}
+
 label-disconnected = disconnected
-label-disconnected-foreground = ${nordcolors.nord11}
+label-disconnected-foreground = ${draculacolors.red}
 
 [module/updates-pacman-aurhelper]
 type = custom/script
@@ -323,15 +375,15 @@ monitor-fallback = DP-1
 offset-x = 5%
 offset-y = 1%
 bottom = false
-height = 3%
+height = 50
 width = 90%
-padding = 2
+padding = 0
 fixed-center = true
 wm-name = bspwm
 dpi = 144
 enable-ipc = true
 
-foreground = ${nordcolors.nord4}
+foreground = ${draculacolors.foreground}
 
 overline-size = 4
 underline-size = 4
@@ -340,21 +392,21 @@ radius-top = 12
 radius-bottom = 12
 
 ; Number of spaces to add before/after each module
-module-margin-left = 1
-module-margin-right = 1
+module-margin-left = 0
+module-margin-right = 0
 
 wm-restack = bspwm
 modules-left = date bspwm
-modules-center = mpd
+modules-center =
 modules-right = sound network cpu battery memory
 
-font-0 = "Fira Code:size=12:style=Regular;4"
-font-1 = "Fira Code:size=20:style=Regular;3"
-font-2 = "Font Awesome 5 Free:size=15:style=Regular;1"
-font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
+font-0 = "Fira Code:size=14:style=Regular;4"
+font-1 = "Fira Code:size=23:style=Regular;6"
+font-2 = "Font Awesome 5 Free:size=15:style=Regular;4"
+font-3 = "Font Awesome 5 Brands:size=15:style=Regular;4"
 font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
 
-background = ${nordcolors.nord3}
+background = ${draculacolors.background}
 
 [bar/bottom]
 monitor = 
@@ -370,7 +422,7 @@ wm-name = bspwm
 dpi = 144
 enable-ipc = true
 
-foreground = ${nordcolors.nord4}
+foreground = ${draculacolors.foreground}
 
 overline-size = 4
 underline-size = 4
@@ -385,7 +437,7 @@ module-margin-right = 1
 wm-restack = bspwm
 modules-left = taskwarrior
 modules-center = title
-modules-right = mpd-bar  light updates-pacman-aurhelper
+modules-right = mpd light updates-pacman-aurhelper
 
 font-0 = "Fira Code:size=12:style=Regular;4"
 font-1 = "Fira Code:size=20:style=Regular;3"
@@ -393,7 +445,7 @@ font-2 = "Font Awesome 5 Free:size=15:style=Regular;1"
 font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
 font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
 
-background = ${nordcolors.nord1}
+background = ${draculacolors.background}
 
 
 [global/wm]
