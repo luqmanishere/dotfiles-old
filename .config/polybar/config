@@ -1,3 +1,5 @@
+; vi: ft=dosini
+
 [nordcolors]
 nord0 = #2E3440
 nord1 = #3B4252
@@ -234,7 +236,8 @@ format-muted-prefix-foreground = ${draculacolors.orange}
 
 ; Label muted
 label-muted =  muted
-label-muted-foreground = ${draculacolors.red}
+label-muted-foreground = ${draculacolors.currentline}
+label-muted-underline = ${draculacolors.red}
 
 ; Ramp volume
 ramp-volume-0 = 
@@ -276,13 +279,15 @@ format-connected-background = ${draculacolors.orange}
 
 label-connected =  connected
 label-connected-foreground = ${draculacolors.currentline}
+label-connected-underline = ${draculacolors.cyan}
 
 ; Disconnected
 format-disconnected = %{F-} <label-disconnected>
 format-disconnected-background = ${draculacolors.orange}
 
 label-disconnected = disconnected
-label-disconnected-foreground = ${draculacolors.red}
+label-disconnected-foreground = ${draculacolors.currentline}
+label-disconnected-underline = ${draculacolors.red}
 
 [module/updates-pacman-aurhelper]
 type = custom/script
@@ -334,40 +339,6 @@ icon-repeat = 
 toggle-on-foreground = #ff
 toggle-off-foreground = #55
 
-; Only applies if <bar-progress> is used
-bar-progress-width = 10
-bar-progress-indicator = |
-bar-progress-fill = ─
-bar-progress-empty = ─
-
-
-[module/mpd-bar]
-type = internal/mpd
-
-
-; Host where mpd is running (either ip or domain name)
-; Can also be the full path to a unix socket where mpd is running.
-host = 127.0.0.1
-port = 6600
-; password = mysecretpassword
-
-; Display format
-format-online = <label-song> <bar-progress>
-format-playing = ${self.format-online}
-format-paused = ${self.format-online}
-format-stopped = ${self.format-online}
-
-label-song = 
-
-; Daemon offline format
-label-offline = 🎜 mpd is offline
-
-; Only applies if <bar-progress> is used
-bar-progress-width = 20
-bar-progress-indicator = |
-bar-progress-fill = -
-bar-progress-empty = ─
-
 
 [bar/top]
 monitor = 
@@ -386,7 +357,7 @@ enable-ipc = true
 foreground = ${draculacolors.foreground}
 
 overline-size = 4
-underline-size = 4
+underline-size = 8
 
 radius-top = 12
 radius-bottom = 12
@@ -397,7 +368,7 @@ module-margin-right = 0
 
 wm-restack = bspwm
 modules-left = date bspwm
-modules-center =
+modules-center = mpd
 modules-right = sound network cpu battery memory
 
 font-0 = "Fira Code:size=14:style=Regular;4"
@@ -435,9 +406,9 @@ module-margin-left = 1
 module-margin-right = 1
 
 wm-restack = bspwm
-modules-left = taskwarrior
+modules-left = 
 modules-center = title
-modules-right = mpd light updates-pacman-aurhelper
+modules-right = light updates-pacman-aurhelper
 
 font-0 = "Fira Code:size=12:style=Regular;4"
 font-1 = "Fira Code:size=20:style=Regular;3"
@@ -446,6 +417,10 @@ font-3 = "Font Awesome 5 Brands:size=15:style=Regular;1"
 font-4 = Font Awesome 5 Free Solid:size=15:style=Regular;4
 
 background = ${draculacolors.background}
+
+tray-position = left
+tray-maxsize = 30
+tray-background = ${draculacolors.currentline}
 
 
 [global/wm]
