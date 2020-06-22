@@ -22,6 +22,7 @@ super + Escape
 # lockscreen
 alt + shift + x
 	xautolock -locknow
+	xset dpms force off
 
 # change backlight {add,subtract}
 {XF86MonBrightnessUp,XF86MonBrightnessDown}

@@ -125,8 +125,9 @@ label-occupied-foreground =
 label-occupied-background = 
 
 ; Urgent
-label-urgent = %{F#ff5555}%{T2}%{T-}%{B-}%{F-} %icon% %{T2}%{B-}%{F#ff5555}%{F-}%{T-}
+label-urgent = %{F#282a36}%{T2}%{T-}%{B#ff5555}%{F-} %icon% %{T2}%{B-}%{F#ff5555}%{F-}%{T-}
 label-urgent-foreground = 
+label-urgent-background = ${draculacolors.red}
 
 ; Label for empty workspaces
 label-empty = %{F#282a36}%{T2}%{T-}%{B-}%{F-} %icon% %{T2}%{B-}%{F#282a36}%{F-}%{T-}
@@ -233,6 +234,9 @@ format-muted-prefix = 
 format-muted-prefix-font = 2
 format-muted-prefix-background = ${draculacolors.background}
 format-muted-prefix-foreground = ${draculacolors.orange}
+
+label-volume = %percentage%%
+label-volume-foreground = ${draculacolors.currentline}
 
 ; Label muted
 label-muted =  muted
