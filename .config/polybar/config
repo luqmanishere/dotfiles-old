@@ -57,11 +57,19 @@ poll-interval = 5
 ; Charging
 format-charging = <animation-charging>  <label-charging>
 format-charging-background = ${draculacolors.comment}
+format-charging-prefix = 
+format-charging-prefix-foreground = ${draculacolors.comment}
+format-charging-prefix-background = ${draculacolors.pink}
+format-charging-prefix-font = 2
 label-charging = %percentage%% 
 
 ; discharge
 format-discharging = <ramp-capacity>  <label-discharging>
 format-discharging-background = ${draculacolors.comment}
+format-discharging-prefix = 
+format-discharging-prefix-foreground = ${draculacolors.comment}
+format-discharging-prefix-background = ${draculacolors.pink}
+format-discharging-prefix-font = 2
 label-discharging = %percentage%% 
 
 ; Full
