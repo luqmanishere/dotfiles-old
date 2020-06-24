@@ -97,7 +97,7 @@ Master :gmail-dev1-remote:"Inbox"
 Slave :gmail-dev1-local:Inbox
 
 Channel gmail-dev1-sent
-Master :gmail-dev1-remote:"Sent"
+Master :gmail-dev1-remote:"[Gmail]/Sent Mail"
 Slave :gmail-dev1-local:Sent
 
 Channel gmail-dev1-draft
@@ -114,3 +114,50 @@ Channel gmail-dev1-inbox
 Channel gmail-dev1-sent
 Channel gmail-dev1-draft
 Channel gmail-dev1-trash
+
+##########################################
+######### Gmail Dev2 Account #############
+##########################################
+IMAPAccount gmail-dev2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+SSLType IMAPS
+Host imap.gmail.com
+User saya789.mn@gmail.com
+# Must be an application specific password, otherwise google will deny access.
+PassCmd "pass show Gmail/saya789/appspecific"
+# Throttle mbsync so we don't go over gmail's quota: OVERQUOTA error would
+# eventually be returned otherwise. For more details see:
+# https://sourceforge.net/p/isync/mailman/message/35458365/
+PipelineDepth 50
+
+MaildirStore gmail-dev2-local
+# The trailing "/" is important
+Path ~/.mail/gmail-dev2/
+Inbox ~/.mail/gmail-dev2/Inbox
+Subfolders Verbatim
+
+IMAPStore gmail-dev2-remote
+Account gmail-dev2
+
+Channel gmail-dev2-inbox
+Master :gmail-dev2-remote:"Inbox"
+Slave :gmail-dev2-local:Inbox
+
+Channel gmail-dev2-sent
+Master :gmail-dev2-remote:"[Gmail]/Sent Mail"
+Slave :gmail-dev2-local:Sent
+
+Channel gmail-dev2-draft
+Master :gmail-dev2-remote:"[Gmail]/Drafts"
+Slave :gmail-dev2-local:Drafts
+
+Channel gmail-dev2-trash
+Master :gmail-dev2-remote:"[Gmail]/Trash"
+Slave :gmail-dev2-local:Trash
+
+# Get all the gmail channels together into a group.
+Group gmail-dev2
+Channel gmail-dev2-inbox
+Channel gmail-dev2-sent
+Channel gmail-dev2-draft
+Channel gmail-dev2-trash

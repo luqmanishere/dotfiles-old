@@ -85,6 +85,8 @@ named-mailboxes "=Office=" =div1
 mailboxes =office/Inbox =office/Sent =office/Archive =office/Trash 
 named-mailboxes "=Gmail-Dev1=" =div2
 mailboxes =gmail-dev1/Inbox =gmail-dev1/Sent =gmail-dev1/Drafts =gmail-dev1/Trash
+named-mailboxes "=Gmail-Dev2=" =div3
+mailboxes =gmail-dev2/Inbox =gmail-dev2/Sent =gmail-dev2/Drafts =gmail-dev2/Trash
 
 # keybindings
 source ~/.mutt/bindings
@@ -98,6 +100,10 @@ source ~/.mutt/accounts/office
 # when changing into other mailboxes, use different adresses etc.
 folder-hook office/* source ~/.mutt/accounts/office
 folder-hook gmail-dev1/* source ~/.mutt/accounts/gmail-dev1
+folder-hook gmail-dev2/* source ~/.mutt/accounts/gmail-dev2
 
+# urlscan
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+set new_mail_command="dunstify 'New Email' '%n new messages, %u unread.' &"

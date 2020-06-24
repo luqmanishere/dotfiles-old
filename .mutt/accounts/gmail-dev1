@@ -1,3 +1,4 @@
+# vi: ft=muttrc
 
 set from = "saya567.mn@gmail.com"
 set sendmail = "/usr/bin/msmtp -a gmail-dev1"

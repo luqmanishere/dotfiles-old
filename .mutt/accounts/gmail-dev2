@@ -1,0 +1,29 @@
+# vi: ft=muttrc
+set from = "saya789.mn@gmail.com"
+set sendmail = "/usr/bin/msmtp -a gmail-dev2"
+
+# Set folders
+set spoolfile = "+gmail-dev2/Inbox"
+set mbox = "+gmail-dev2/Archive"
+set postponed = "+gmail-dev2/Drafts"
+set record = "+gmail-dev2/Sent"
+set trash = "+gmail-dev2/Trash"
+
+color status magenta default
+
+macro index o "<shell-escape>mbsync gmail-dev2<enter>" "run mbsync to sync mail for this account"
+
+
+macro index,pager J \
+  "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
+  <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
+  <save-message>+gmail-dev2/Junk<enter>" \
+  "mark as read and move to junk folder"
+
+macro index,pager A \
+  "<save-message>+gmail-dev2/Archive<enter>"  \
+  "move message to the archive"
+
+macro index,pager I \
+  "<save-message>+gmail-dev2/Inbox<enter>"  \
+  "move message to the inbox"
