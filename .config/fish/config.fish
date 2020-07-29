@@ -14,7 +14,9 @@ alias dotdrop="/home/luqman/dotfiles/dotdrop.sh --cfg=/home/luqman/dotfiles/conf
 
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME"
 
-alias ls="/usr/bin/exa"
+alias ls (which exa)
+
+alias dotbare $HOME/.dotbare/dotbare
 
 abbr pacinstall "sudo pacman -S --needed"
 
