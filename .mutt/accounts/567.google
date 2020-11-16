@@ -1,0 +1,2 @@
+virtual-mailboxes "Inbox" "notmuch://?query=tag:inbox and tag:567"
+virtual-mailboxes "Sent" "notmuch://?query=tag:sent and tag:567"

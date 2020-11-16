@@ -1,6 +1,6 @@
 # Variables
-set -gx PATH $HOME/bin /usr/local/bin $HOME/.local/bin $HOME/.cargo/bin /snap/bin $PATH
-set -gx EDITOR nvim
+set -gx PATH $HOME/bin /usr/local/bin $HOME/.local/bin $HOME/.cargo/bin /snap/bin ~/.emacs.d/bin $PATH
+set -gx EDITOR emacs
 set -gx LFS /mnt/lfs
 set -gx PROJECT_PATHS ~/projects
 set -gx RUSTUP_HOME $HOME/.rustup
@@ -29,3 +29,5 @@ if not functions -q fisher
 end
 
 fish_ssh_agent
+
+starship init fish | source

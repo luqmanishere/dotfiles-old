@@ -10,6 +10,10 @@ echo "Installing SpaceVim"
 
 curl -sLf https://spacevim.org/install.sh | bash
 
+echo "Installing Doom Emacs"
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+
 echo "Updating submodules"
 yadm submodule update --init --recursive
 

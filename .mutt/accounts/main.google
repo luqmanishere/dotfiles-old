@@ -1,0 +1,8 @@
+# Main Google Account
+virtual-mailboxes "Inbox - Main" "notmuch://?query=tag:inbox and tag:Main"
+virtual-mailboxes "Sent" "notmuch://?query=tag:sent and tag:Main"
+virtual-mailboxes "Google" "notmuch://?query=tag:Google and tag:Main"
+virtual-mailboxes "Classroom" "notmuch://?query=tag:Google/Classroom and tag:Main"
+virtual-mailboxes "Quora" "notmuch://?query=tag:Newsletters/Quora and tag:Main"
+
+virtual-mailboxes "Inbox - 567" "notmuch://?query=tag:inbox and tag:567"

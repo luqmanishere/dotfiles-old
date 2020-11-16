@@ -363,7 +363,7 @@ width = 90%
 padding = 0
 fixed-center = true
 wm-name = bspwm
-dpi = 144
+dpi = 96
 enable-ipc = true
 
 foreground = ${draculacolors.foreground}
@@ -402,7 +402,7 @@ width = 90%
 padding = 2
 fixed-center = true
 wm-name = bspwm
-dpi = 144
+dpi = 96
 enable-ipc = true
 
 foreground = ${draculacolors.foreground}

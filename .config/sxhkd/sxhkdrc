@@ -8,7 +8,7 @@ super + F1
   ~/.config/sxhkd/help.sh
 
 # terminal emulator
-alt + Return
+alt + shift+ t
 	kitty
 
 # program launcher
@@ -37,7 +37,7 @@ XF86AudioMute
 	pactl set-sink-mute 0 true
 
 # quick launcher
-alt + x
+alt + x + c
   $HOME/.config/rofi/bin/apps.sh
 
 #
