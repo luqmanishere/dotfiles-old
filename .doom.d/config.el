@@ -58,3 +58,10 @@
 
 ;; Set evil escape to kj like in my vim config
 (setq-default evil-escape-key-sequence "kj")
+
+(setq lsp-clients-clangd-args '("-j=3"
+                                "--background-index"
+                                "--clang-tidy"
+                                "--completion-style=detailed"
+                                "--header-insertion=never"))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))

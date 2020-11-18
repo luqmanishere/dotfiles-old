@@ -11,23 +11,24 @@ set theme_color_scheme dracula
 
 # aliases
 alias dotdrop="/home/luqman/dotfiles/dotdrop.sh --cfg=/home/luqman/dotfiles/config.yaml"
-
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-
 alias ls (which exa)
-
 alias dots $HOME/.dotbare/dotbare
+alias mux tmuxinator
 
+# abbreviations
 abbr pacinstall "sudo pacman -S --needed"
-
 abbr pacupdate "sudo pacman -Syu"
 
+# install fisher if not installed
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
     fish -c fisher
 end
 
+# start ssh agent
 fish_ssh_agent
 
+# initialize starship prompt
 starship init fish | source
