@@ -20,18 +20,32 @@ alias mux tmuxinator
 abbr pacinstall "sudo pacman -S --needed"
 abbr pacupdate "sudo pacman -Syu"
 
-starship init fish | source
 # install fisher if not installed
-if not functions -q fisher
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-    cd ~/.config/fish/functions && wget git.io/fisher
-    mv fisher fisher.fish
-    source fisher.fish && fisher update
-    cd
-    fish
+#if not functions -q fisher
+#    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+#    cd ~/.config/fish/functions && wget git.io/fisher
+#    mv fisher fisher.fish
+#    source fisher.fish && fisher update
+#    cd
+#    fish
+#end
+
+# Fisher is being an ass, so i'll use fundle for now
+if not functions -q fundle
+    eval (curl -sfL https://git.io/fundle-install)
 end
+
+fundle plugin 'edc/bass'
+fundle plugin 'franciscolourenco/done'
+fundle plugin 'jethrokuan/fzf'
+fundle plugin 'jethrokuan/z'
+fundle plugin 'laughedelic/pisces'
+fundle plugin 'oh-my-fish/plugin-bang-bang'
+
+fundle init
 
 # start ssh agent
 fish_ssh_agent
 
 # initialize starship prompt
+starship init fish | source
