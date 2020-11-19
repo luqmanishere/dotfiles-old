@@ -19,6 +19,7 @@ alias mux tmuxinator
 # abbreviations
 abbr pacinstall "sudo pacman -S --needed"
 abbr pacupdate "sudo pacman -Syu"
+abbr playlom "telnet playlom.com 4000"
 
 # install fisher if not installed
 #if not functions -q fisher
