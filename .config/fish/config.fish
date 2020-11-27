@@ -17,9 +17,7 @@ alias dots $HOME/.dotbare/dotbare
 alias mux tmuxinator
 
 # abbreviations
-abbr pacinstall "sudo pacman -S --needed"
-abbr pacupdate "sudo pacman -Syu"
-abbr playlom "telnet playlom.com 4000"
+source $__fish_config_dir/conf.d/abbr.fish
 
 # install fisher if not installed
 #if not functions -q fisher
@@ -42,6 +40,7 @@ fundle plugin 'jethrokuan/fzf'
 fundle plugin 'jethrokuan/z'
 fundle plugin 'laughedelic/pisces'
 fundle plugin 'oh-my-fish/plugin-bang-bang'
+fundle plugin 'gazorby/fish-abbreviation-tips'
 
 fundle init
 

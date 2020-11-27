@@ -13,7 +13,11 @@ alt + shift+ t
 
 # program launcher
 alt + @space
-  rofi -modi "run,drun" -show drun -display-run 'ﰌ' -display-drun 'ﰌ' -terminal kitty -theme $HOME/.local/share/rofi/nord.rasi
+  rofi -modi "run,drun" -show drun -display-run 'ﰌ' -display-drun 'ﰌ' -terminal kitty -theme $HOME/.local/share/rofi/dracula.rasi
+
+# window switcher
+alt + Tab
+  rofi -modi "window" -show window -display-window '' -terminal kitty -theme $HOME/.local/share/rofi/dracula.rasi
 
 # make sxhkd reload its configuration files:
 super + Escape

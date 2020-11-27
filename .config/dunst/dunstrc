@@ -31,6 +31,9 @@
     # screen width minus the width defined in within the geometry option.
     geometry = "350x5-100+90"
 
+    # Add rounded corners
+    corner_radius = 20
+
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
 
