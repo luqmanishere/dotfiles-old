@@ -54,3 +54,4 @@ windows:
       panes:
         - emacs -nw
   - neomutt: neomutt
+  - run: 

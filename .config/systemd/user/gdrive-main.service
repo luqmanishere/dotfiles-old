@@ -1,0 +1,7 @@
+[Unit]
+Description=Main GDrive synchronization service
+OnFailure=gdrive-noti.service
+
+[Service]
+Type=oneshot
+ExecStart=rclone sync -v gdrive-main: /home/luqman/Documents/gdrive-main

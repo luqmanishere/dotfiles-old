@@ -1,0 +1,10 @@
+[Unit]
+Description=GDrive synchronization timer
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=3m
+Unit=gdrive-main.service
+
+[Install]
+WantedBy=timers.target
