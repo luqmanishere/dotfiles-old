@@ -1,0 +1,4 @@
+[Unit]
+Description=Polybar
+Documentation=man:polybar(1)
+Wants=polytop.service polybot.service

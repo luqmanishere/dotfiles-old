@@ -58,5 +58,4 @@ set adjust-open width
 set recolor true
 
 # Save reading position every page change
-set continuous-hist-save true
 set statusbar-basename true

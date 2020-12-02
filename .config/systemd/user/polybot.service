@@ -1,0 +1,14 @@
+[Unit]
+Description=Polybar bottom
+Documentation=man:polybar(1)
+PartOf=polybar.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=polybar bottom
+
+RestartSec=2
+
+[Install]
+WantedBy=polybar.target

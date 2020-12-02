@@ -28,7 +28,7 @@ bspc rule -a TelegramDesktop desktop='^4' state=floating
 bspc rule -a Zeal state=floating
 bspc rule -a kitfloat state=floating
 
-$HOME/.config/polybar/launch.sh
+systemctl --user restart polybar.target
 $HOME/.config/dunst/launch.sh
 feh --bg-scale ~/.config/wallpaper/alena-aenami-all-i-need-1080p.jpg &
 picom --experimental-backends --config ~/.config/picom/picom.conf &
