@@ -4,4 +4,4 @@ OnFailure=gdrive-noti.service
 
 [Service]
 Type=oneshot
-ExecStart=rclone sync -v gdrive-main: /home/luqman/Documents/gdrive-main
+ExecStart=/home/luqman/bin/rclonesync gdrive-main: /home/luqman/Documents/gdrive-main
