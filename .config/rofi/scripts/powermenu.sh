@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 ## Author : Aditya Shakya (adi1090x)
+## Modified by : Luqmanul Hakim 
 ## Mail : adi1090x@gmail.com
 ## Github : @adi1090x
 ## Reddit : @adi1090x
 
-rofi_command="rofi -theme themes/powermenu.rasi"
+rofi_command="rofi -theme $HOME/.config/rofi/themes/powermenu.rasi"
 uptime=$(uptime -p | sed -e 's/up //g')
 
 # Options
@@ -28,6 +29,8 @@ case $chosen in
         ;;
     $lock)
         xautolock -locknow
+        sleep 10
+        xset dpms force off
         ;;
     $suspend)
         mpc -q pause
