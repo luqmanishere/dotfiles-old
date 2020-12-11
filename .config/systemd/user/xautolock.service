@@ -1,0 +1,12 @@
+[Unit]
+Description=XAutolock screen locking service
+Documentation=man:xautolock(1)
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/xautolock -detectsleep -time 10 -corners 000- -cornersize 30 -locker "betterlockscreen -l blur" -notify 300 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 5 minutes' ; sleep 20 ; xset dpms force off"
+
+RestartSec=2
+
+[Install]

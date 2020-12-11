@@ -6,7 +6,7 @@ PartOf=polybar.target
 [Service]
 Type=simple
 Environment=DISPLAY=:0
-ExecStart=polybar bottom
+ExecStart=/usr/bin/polybar bottom
 
 RestartSec=2
 

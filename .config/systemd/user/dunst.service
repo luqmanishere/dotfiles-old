@@ -1,0 +1,13 @@
+[Unit]
+Description=Dunst Notification Service
+Documentation=man:dunst(1)
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/dunst
+ExecStop=/usr/bin/pkill dunst
+
+RestartSec=2
+
+[Install]
