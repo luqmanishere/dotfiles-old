@@ -22,6 +22,12 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 15)
+      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 26))
+      ;;doom-variable-pitch-font (font-spec :family "Overpass" :size 24)
+      ;;doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -59,10 +65,47 @@
 ;; Set evil escape to kj like in my vim config
 (setq-default evil-escape-key-sequence "kj")
 
+;; clangd lsp settings
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
 (setq lsp-clients-clangd-args '("-j=3"
                                 "--background-index"
                                 "--clang-tidy"
                                 "--completion-style=detailed"
                                 "--header-insertion=never"))
-(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+
+;; Set project path for projectile
+(setq projectile-project-search-path '("~/projects/"))
+
+;; Centaur Tabs settings
 (after! centaur-tabs (centaur-tabs-group-by-projectile-project))
+
+;; Org Roam variables
+(setq org-roam-dailies-directory "daily/")
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         #'org-roam-capture--get-point
+         "* %?"
+         :file-name "daily/%<%Y-%m-%d>"
+         :head "#+title: %<%Y-%m-%d>\n\n")))
+
+(setq deft-directory "~/org/roam")
+
+(defun ea-popup-handler (app-name window-title x y w h)
+  ;; other stuff here
+  (when (gui-get-selection 'PRIMARY) (insert (gui-get-selection 'PRIMARY)))
+  (set-transient-map (let ((keymap (make-sparse-keymap)))
+                          (define-key keymap (kbd "DEL")   (lambda! (delete-region (point-min) (point-max))))
+                          (define-key keymap (kbd "C-SPC") (lambda! (delete-region (point-min) (point-max))))
+                          keymap)))
+
+(fringe-mode 8)
+
+(keychain-refresh-environment)
+
+(add-to-list 'tramp-methods
+ '("yadm"
+   (tramp-login-program "yadm")
+   (tramp-login-args (("enter")))
+   (tramp-login-env (("SHELL") ("/bin/sh")))
+   (tramp-remote-shell "/bin/sh")
+   (tramp-remote-shell-args ("-c"))))
