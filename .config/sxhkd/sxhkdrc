@@ -16,8 +16,8 @@ alt + @space
   rofi -modi "run,drun" -show drun -display-run 'ﰌ' -display-drun 'ﰌ' -terminal kitty 
 
 # window switcher
-alt + Tab
-  ~/.config/rofi/scripts/rofi.sh -m alttab
+# alt + Tab
+  # ~/.config/rofi/scripts/rofi.sh -m alttab
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -43,6 +43,26 @@ XF86AudioMute
 # quick launcher
 alt + x + c
   $HOME/.config/rofi/bin/apps.sh
+
+# Screenshot whole screen
+alt + s
+  scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png && dunstify "Screenshot taken"
+
+# Screenshot selection
+alt + shift + s
+  scrot --select ~/Pictures/Screenshots/%b%d::%H%M%S.png && dunstify "Screenshot taken"
+
+# Emacs
+alt + e
+  emacsclient -c
+
+# Emacs Anywhere
+alt + shift + e
+  ~/.emacs_anywhere/bin/run
+
+# Org Capture
+alt + c
+  org-capture
 
 #
 # bspwm hotkeys

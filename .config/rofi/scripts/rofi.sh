@@ -11,7 +11,7 @@ while getopts "m:l:" OPTION; do
             MODE="$OPTARG"
             case "$MODE" in
                 alttab)
-                    ROFI_ARGS+=( -show window -selected-row 1) # -selected-row is only available in https://github.com/davatorium/rofi/pull/909
+                    ROFI_ARGS+=( -show windowcd -selected-row 1) # -selected-row is only available in https://github.com/davatorium/rofi/pull/909
                     KB_ACCEPT_APPEND=",!Alt+Alt_L"
                     ;;
                 altspace)

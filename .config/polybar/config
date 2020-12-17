@@ -207,7 +207,7 @@ format-suffix-background = ${draculacolors.background}
 format-suffix-foreground = ${draculacolors.green}
 format-background = ${draculacolors.green}
 format-foreground = ${draculacolors.currentline}
-label = %{F-}  %date%  %time%
+label = %{F#44475a}  %date%  %time%
 
 date = %Y-%m-%d%
 ; Optional time format

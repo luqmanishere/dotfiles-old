@@ -18,23 +18,30 @@ bspc config gapless_monocle      false
 bspc config focus_follows_pointer true
 
 bspc rule -a Gimp desktop='^5' state=floating follow=on
-bspc rule -a Chromium desktop='^3'
 bspc rule -a mplayer2 state=floating
-bspc rule -a firefox desktop='^3'
+bspc rule -a Zathura state=pseudo_tiled
+bspc rule -a TelegramDesktop desktop='^4' state=pseudo_tiled
+bspc rule -a riseria state=floating
+
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a URxvt:urxvt_keys_help state=floating
-bspc rule -a TelegramDesktop desktop='^4' state=floating
 bspc rule -a Zeal state=floating
 bspc rule -a kitfloat state=floating
 
+# Import environment into systemd
+systemctl --user import-environment
+
+# start systemd user services
 systemctl --user restart polybar.target
-$HOME/.config/dunst/launch.sh
+systemctl --user restart dunst.service
+systemctl --user restart xautolock.service
+systemctl --user restart alttab.service
+
 feh --bg-scale ~/.config/wallpaper/alena-aenami-all-i-need-1080p.jpg &
 picom --experimental-backends --config ~/.config/picom/picom.conf &
-xautolock -detectsleep -time 10 -locker "betterlockscreen -l blur" \
-  -notify 300 \
-  -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 5 minutes' ; sleep 20 ; xset \
-  dpms force off" &
+#xautolock -detectsleep -time 10 -corners 000- -cornersize 30 -locker "betterlockscreen -l blur" \
+#  -notify 300 \
+#  -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 5 minutes' ; sleep 20 ; xset \
+#  dpms force off" &
 
-systemctl --user import-environment
