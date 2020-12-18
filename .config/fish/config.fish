@@ -15,6 +15,7 @@ alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias ls (which exa)
 alias dots $HOME/.dotbare/dotbare
 alias mux tmuxinator
+alias ip "ip -c=auto"
 
 # abbreviations
 source $__fish_config_dir/conf.d/abbr.fish
@@ -41,11 +42,15 @@ fundle plugin 'jethrokuan/z'
 fundle plugin 'laughedelic/pisces'
 fundle plugin 'oh-my-fish/plugin-bang-bang'
 fundle plugin 'gazorby/fish-abbreviation-tips'
+fundle plugin 'oh-my-fish/plugin-foreign-env'
 
 fundle init
 
 # start ssh agent
-fish_ssh_agent
+#fish_ssh_agent
+#echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >/home/luqman/.ssh/env-sock
+#echo "SSH_AGENT_PID=$SSH_AGENT_PID" >/home/luqman/.ssh/env-pid
+eval (keychain --eval --agents ssh -Q --quiet git --nogui)
 
 # initialize starship prompt
 starship init fish | source
