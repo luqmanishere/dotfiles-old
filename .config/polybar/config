@@ -111,7 +111,7 @@ ws-icon-0 = terminal;
 ws-icon-1 = code;
 ws-icon-2 = browser;
 ws-icon-3 = comms;
-ws-icon-4 = misc;
+ws-icon-4 = work;
 ws-icon-default = 
 
 enable-click = true

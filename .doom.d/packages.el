@@ -51,3 +51,4 @@
 
 (package! systemd)
 (package! keychain-environment)
+(package! yequake)

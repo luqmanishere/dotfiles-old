@@ -46,11 +46,11 @@ alt + x + c
 
 # Screenshot whole screen
 alt + s
-  scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png && dunstify "Screenshot taken"
+  scrot ~/Pictures/Screenshots/'%Y-%m-%d_%H%M%S_$a.png' && dunstify "Screenshot taken"
 
 # Screenshot selection
 alt + shift + s
-  scrot --select ~/Pictures/Screenshots/%b%d::%H%M%S.png && dunstify "Screenshot taken"
+  sleep 0.2 ; scrot -s ~/Pictures/Screenshots/'%Y-%m-%d_%H%M%S_$a.png' && dunstify "Screenshot taken"
 
 # Emacs
 alt + e
@@ -181,13 +181,11 @@ super + {Left,Down,Up,Right}
 alt + r
   bspc node @/ -R 90
 
-
-
 # hide window
 super + v
   bspc node -g hidden
 
 # unhide window
 super + shift + v
-  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+  bspc node {,$(bspc query -N -n .hidden | head -n1)} -g hidden=off
 

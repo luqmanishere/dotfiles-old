@@ -1,8 +1,8 @@
 #! /bin/sh
 
-sxhkd &
+sxhkd -r /home/luqman/.config/sxhkd/output &
 
-bspc monitor -d terminal code browser comms misc
+bspc monitor -d terminal code browser comms work misc1 misc2
 
 bspc config border_width         6
 bspc config normal_border_color "#44475a"

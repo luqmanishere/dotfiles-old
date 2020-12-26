@@ -88,7 +88,23 @@
          :file-name "daily/%<%Y-%m-%d>"
          :head "#+title: %<%Y-%m-%d>\n\n")))
 
+;; Deft notes Directory
 (setq deft-directory "~/org/roam")
+
+;; Fringe size
+(fringe-mode 8)
+
+;; Import environment from keychain
+(keychain-refresh-environment)
+
+;; Allow management of yadm from magit
+(add-to-list 'tramp-methods
+ '("yadm"
+   (tramp-login-program "yadm")
+   (tramp-login-args (("enter")))
+   (tramp-login-env (("SHELL") ("/bin/sh")))
+   (tramp-remote-shell "/bin/sh")
+   (tramp-remote-shell-args ("-c"))))
 
 (defun ea-popup-handler (app-name window-title x y w h)
   ;; other stuff here
@@ -97,15 +113,3 @@
                           (define-key keymap (kbd "DEL")   (lambda! (delete-region (point-min) (point-max))))
                           (define-key keymap (kbd "C-SPC") (lambda! (delete-region (point-min) (point-max))))
                           keymap)))
-
-(fringe-mode 8)
-
-(keychain-refresh-environment)
-
-(add-to-list 'tramp-methods
- '("yadm"
-   (tramp-login-program "yadm")
-   (tramp-login-args (("enter")))
-   (tramp-login-env (("SHELL") ("/bin/sh")))
-   (tramp-remote-shell "/bin/sh")
-   (tramp-remote-shell-args ("-c"))))
