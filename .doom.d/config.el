@@ -97,14 +97,6 @@
 ;; Import environment from keychain
 (keychain-refresh-environment)
 
-;; Allow management of yadm from magit
-(add-to-list 'tramp-methods
- '("yadm"
-   (tramp-login-program "yadm")
-   (tramp-login-args (("enter")))
-   (tramp-login-env (("SHELL") ("/bin/sh")))
-   (tramp-remote-shell "/bin/sh")
-   (tramp-remote-shell-args ("-c"))))
 
 (defun ea-popup-handler (app-name window-title x y w h)
   ;; other stuff here
@@ -113,3 +105,62 @@
                           (define-key keymap (kbd "DEL")   (lambda! (delete-region (point-min) (point-max))))
                           (define-key keymap (kbd "C-SPC") (lambda! (delete-region (point-min) (point-max))))
                           keymap)))
+
+(defun yequake-org-roam-capture (&optional goto keys)
+  "Call `org-capture' in a Yequake frame.
+Adds a function to `org-capture-after-finalize-hook' that closes
+the recently toggled Yequake frame and removes itself from the
+hook.
+Note: if another Yequake frame is toggled before the capture is
+finalized, when the capture is finalized, the wrong Yequake frame
+will be toggled."
+  (let* ((remove-hook-fn (lambda ()
+                           (remove-hook 'org-capture-after-finalize-hook #'yequake-retoggle))))
+    (add-hook 'org-capture-after-finalize-hook remove-hook-fn)
+    (add-hook 'org-capture-after-finalize-hook #'yequake-retoggle)
+    ;; MAYBE: Propose an `org-capture-switch-buffer-fn' variable that could be rebound here.
+
+    ;; NOTE: We override `org-switch-to-buffer-other-window' because
+    ;; it always uses `switch-to-buffer-other-window', and we want to
+    ;; display the template menu and capture buffer in the existing
+    ;; window rather than splitting the frame.
+    (cl-letf* (((symbol-function #'org-switch-to-buffer-other-window)
+                (symbol-function #'switch-to-buffer)))
+      (condition-case nil
+          (progn
+            (org-roam-capture goto keys)
+            ;; Be sure to return the "CAPTURE-" buffer, which is the current
+            ;; buffer at this point.
+            (current-buffer))
+        ((error quit)
+         ;; Capture aborted: remove the hook and hide the capture frame.
+         (remove-hook 'org-capture-after-finalize-hook #'yequake-retoggle)
+         (yequake-retoggle))))))
+
+
+
+(setq! yequake-frames
+   '(("org-roam-capture"
+      (buffer-fns . (yequake-org-roam-capture))
+      (width . 0.75)
+      (height . 0.5)
+      (alpha . 0.95)
+      (frame-parameters . ((undecorated . t)
+                           (skip-taskbar . t)
+                           (sticky . t))))
+    ("org-roam-find" .
+         ((width . 0.75)
+          (height . 0.5)
+          (alpha . 0.95)
+          (buffer-fns . (org-roam-find-file))
+          (frame-parameters . ((undecorated . t)))))))
+
+(require 'tramp)
+;; Allow management of yadm from magit
+(add-to-list 'tramp-methods
+ '("yadm"
+   (tramp-login-program "yadm")
+   (tramp-login-args (("enter")))
+   (tramp-login-env (("SHELL") ("/bin/sh")))
+   (tramp-remote-shell "/bin/sh")
+   (tramp-remote-shell-args ("-c"))))

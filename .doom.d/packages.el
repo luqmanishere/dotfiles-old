@@ -51,4 +51,4 @@
 
 (package! systemd)
 (package! keychain-environment)
-(package! yequake)
+(package! yequake :recipe (:host github :repo "luqmanulhakim11/yequake"))

@@ -62,7 +62,11 @@ alt + shift + e
 
 # Org Capture
 alt + c
-  org-capture
+  emacsclient -n -e '(yequake-toggle "org-roam-capture")'
+
+# Org Roam
+alt + shift + c
+  emacsclient -n -e '(yequake-toggle "org-roam-find")'
 
 #
 # bspwm hotkeys
