@@ -1,0 +1,13 @@
+[Unit]
+Description=alttab window switching service
+Documentation=man:alttab(1)
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/alttab -w 1 -d 1
+ExecStop=/usr/bin/pkill alttab
+
+RestartSec=2
+
+[Install]

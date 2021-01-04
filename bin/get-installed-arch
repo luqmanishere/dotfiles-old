@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+if [ ! -d "$HOME/.config/packages" ]
+then
+    mkdir -p "$HOME/.config/packages"
+    fi
+
+echo "Pacman packages:"
+pacman -Qqen | tee "$HOME/.config/packages/installed-pacman-packages"
+echo "AUR packages:"
+pacman -Qqem | tee "$HOME/.config/packages/installed-aur-packages"
