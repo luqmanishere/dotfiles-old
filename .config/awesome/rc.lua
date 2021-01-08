@@ -2,6 +2,8 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+-- Prevent awesome from showing tmux keybindings
+package.loaded["awful.hotkeys_popup.keys.tmux"] = {}
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -14,6 +16,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+-- Widgets
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -45,12 +49,12 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/luqman/.config/awesome/theme.lua")
+beautiful.init(gears.filesystem.get_configuration_dir().."theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-editor = os.getenv("EDITOR") or "emacs"
-editor_cmd = terminal .. " -e " .. editor
+editor = os.getenv("EDITOR") or "emacsclient -c"
+editor_cmd = editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -101,9 +105,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -195,25 +196,45 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons
     }
 
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    -- Create the top wibox
+    s.topwibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
+    s.topwibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
+            spacing = 5,
+            batteryarc_widget({
+                    font = beautiful.font,
+                    arc_thickness = 2,
+                    enable_battery_warning = false,
+                    size = 25
+            }),
             mytextclock,
             s.mylayoutbox,
+        },
+    }
+    
+    -- Create the bottom wibox
+    s.botwibox = awful.wibar({ position = "bottom", screen = s })
+
+    -- Add widgets to the bottom wibox
+    s.botwibox:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            wibox.widget.systray(),
+        },
+        -- Middle widget
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
         },
     }
 end)
@@ -221,9 +242,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 3, function () mymainmenu:toggle() end)
+    -- awful.button({ }, 4, awful.tag.viewnext),
+    -- awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
@@ -326,7 +347,46 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- Utilities
+    -- Screenshot
+    awful.key({ }, "Print", function() awful.spawn.with_shell("scrot ~/Pictures/Screenshots/'%Y-%m-%d_%H%M%S_$a.png' && notify-send 'Screenshot taken'") end,
+        {description = "take a screenshot", group = "utilities"}),
+    awful.key({ modkey }, "Print", function() awful.spawn.with_shell("sleep 0.2 ; scrot -s ~/Pictures/Screenshots/'%Y-%m-%d_%H%M%S_$a.png' && notify-send 'Screenshot taken'") end,
+        {description = "take a screenshot with selection", group = "utilities"}),
+    
+    -- Org Mode
+    awful.key({ "Mod1" }, "c", function() awful.spawn("emacsclient -n -e '(yequake-toggle \"org-roam-capture\")'") end,
+        {description = "org capture", group = "utilities"}),
+    awful.key({ "Mod1", "Shift" }, "c", function() awful.spawn("emacsclient -n -e '(yequake-toggle \"org-roam-find\")'") end,
+        {description = "org capture", group = "utilities"}),
+    
+    -- Emacs Anywhere
+    awful.key({ modkey }, "e", function() awful.spawn("/home/luqman/.emacs_anywhere/bin/run") end,
+        {description = "emacs anywhere", group = "utilities"}),
+    
+    -- System Control
+    -- Power Menu
+    awful.key({ modkey, "Mod1" }, "q", function() awful.spawn("/home/luqman/.config/rofi/bin/powermenu.sh") end,
+        {description = "power menu", group = "system control"}),
+    
+    -- Sound
+    awful.key({  }, "XF86AudioRaiseVolume", function() awful.spawn.with_shell("pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%") end,
+        {description = "increase volume", group = "system control"}),
+    awful.key({  }, "XF86AudioLowerVolume", function() awful.spawn.with_shell("pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%") end,
+        {description = "decrease volume", group = "system control"}),
+    awful.key({  }, "XF86AudioMute", function() awful.spawn.with_shell("pactl set-sink-mute 0 true") end,
+        {description = "mute audio", group = "system control"}),
+
+    -- Brightness
+    awful.key({  }, "XF86MonBrightnessUp",
+        function()
+            awful.spawn('light -A 5')
+        end,
+        {description = "increase screen brightness", group = "system control"}),
+    awful.key({  }, "XF86MonBrightnessDown", function() awful.spawn.with_shell('light -U 5') end,
+        {description = "increase screen brightness", group = "system control"})
 )
 
 clientkeys = gears.table.join(
@@ -494,6 +554,9 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = true }
     },
 
+    { rule_any = { name = { "org-roam-capture", "org-roam-find" }
+    }, properties = { placement = awful.placement.center_horizontal+awful.placement.top } }
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
@@ -563,3 +626,9 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- Notifications appear in the middle of the screen
+naughty.config.defaults.position = "top_middle"
+
+-- Start autorun 
+awful.spawn.with_shell("/home/luqman/.config/awesome/autorun.sh")

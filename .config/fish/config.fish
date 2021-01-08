@@ -5,6 +5,10 @@ set -gx LFS /mnt/lfs
 set -gx PROJECT_PATHS ~/projects
 set -gx RUSTUP_HOME $HOME/.rustup
 
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_CACHE_HOME "$HOME/.cache"
+set -gx XDG_DATA_HOME "$HOME/.local/share"
+
 set -xU LESS_TERMCAP_md (printf "\e[01;31m")
 set -xU LESS_TERMCAP_me (printf "\e[0m")
 set -xU LESS_TERMCAP_se (printf "\e[0m")

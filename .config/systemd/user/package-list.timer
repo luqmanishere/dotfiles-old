@@ -1,0 +1,10 @@
+[Unit]
+Description=Package list timer
+
+[Timer]
+OnBootSec=20m
+OnUnitActiveSec=30m
+Unit=package-list.service
+
+[Install]
+WantedBy=timers.target

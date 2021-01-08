@@ -2,6 +2,7 @@ alsa-utils
 amd-ucode
 arch-install-scripts
 archlinux-menus
+arp-scan
 asp
 autoconf
 automake
@@ -93,6 +94,10 @@ newsboat
 nmap
 nnn
 notmuch
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
 ntfs-3g
 ntp
 openssh

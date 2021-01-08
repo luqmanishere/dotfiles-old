@@ -73,6 +73,9 @@
                                 "--completion-style=detailed"
                                 "--header-insertion=never"))
 
+(setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server")
+(setq lsp-clients-lua-language-server-main-location "/usr/share/lua-language-server/main.lua")
+
 ;; Set project path for projectile
 (setq projectile-project-search-path '("~/projects/"))
 

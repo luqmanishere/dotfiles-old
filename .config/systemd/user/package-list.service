@@ -1,0 +1,6 @@
+[Unit]
+Description=Get packages installed on Arch system
+
+[Service]
+Type=oneshot
+ExecStart=/home/luqman/bin/get-installed-arch
