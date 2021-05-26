@@ -1,0 +1,14 @@
+[Unit]
+Description=Laptop to tablet transformation detector
+Documentation=
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/watch_tablet
+ExecStop=/usr/bin/pkill watch_tablet
+
+RestartSec=2
+
+[Install]
+WantedBy=x.target

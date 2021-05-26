@@ -66,7 +66,6 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.floating,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -77,7 +76,7 @@ awful.layout.layouts = {
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    awful.layout.suit.floating,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -214,6 +213,7 @@ awful.screen.connect_for_each_screen(function(s)
             batteryarc_widget({
                     font = beautiful.font,
                     arc_thickness = 2,
+                    show_current_level = true,
                     enable_battery_warning = false,
                     size = 25
             }),
@@ -386,7 +386,11 @@ globalkeys = gears.table.join(
         end,
         {description = "increase screen brightness", group = "system control"}),
     awful.key({  }, "XF86MonBrightnessDown", function() awful.spawn.with_shell('light -U 5') end,
-        {description = "increase screen brightness", group = "system control"})
+        {description = "increase screen brightness", group = "system control"}),
+
+    -- Lock the screen
+    awful.key({ modkey }, "l", function() awful.spawn.with_shell("betterlockscreen -l blur & xset dpms force off") end,
+        {description = "lock the screen", group = "system control"})
 )
 
 clientkeys = gears.table.join(
@@ -550,12 +554,15 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
+    --- { rule_any = {type = { "normal", "dialog" }
+      --- }, properties = { titlebars_enabled = true }
+    --- },
 
     { rule_any = { name = { "org-roam-capture", "org-roam-find" }
-    }, properties = { placement = awful.placement.center_horizontal+awful.placement.top } }
+    }, properties = { placement = awful.placement.center_horizontal+awful.placement.top } },
+
+    { rule_any = { class = { "Conky" }
+    }, properties = { border_width = 0 } }
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
@@ -631,4 +638,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 naughty.config.defaults.position = "top_middle"
 
 -- Start autorun 
-awful.spawn.with_shell("/home/luqman/.config/awesome/autorun.sh")
+awful.spawn.with_shell("/home/luqman/.config/awesome/autostart.sh")

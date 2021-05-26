@@ -1,0 +1,12 @@
+[Unit]
+Description=Screen Rotation detector
+Documentation=
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/screenrotator
+ExecStop=/usr/bin/pkill screenrotator
+
+[Install]
+WantedBy=x.target

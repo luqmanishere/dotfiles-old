@@ -1,0 +1,14 @@
+[Unit]
+Description=Clight auto backlight service
+Documentation=man:clight(1)
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/clight
+ExecStop=/usr/bin/pkill clight
+
+RestartSec=2
+
+[Install]
+WantedBy=x.target

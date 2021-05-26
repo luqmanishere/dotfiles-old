@@ -1,9 +1,15 @@
 [user]
-	email = saya789.mn@gmail.com
-	name = Luqmanul Hakim
+	email = luqmanulhakim1720@gmail.com
+	name = Luqmanul Hakim Nuzrin
+	signingkey = 49752704BA42D1FD
 
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+#	pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
+
+[delta]
+  side-by-side = true
+
 [color]
 	ui = true
 [color "diff-highlight"]

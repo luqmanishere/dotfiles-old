@@ -36,20 +36,23 @@ if not functions -q fundle
     eval (curl -sfL https://git.io/fundle-install)
 end
 
-fundle plugin 'edc/bass'
-fundle plugin 'franciscolourenco/done'
-fundle plugin 'jethrokuan/fzf'
-fundle plugin 'laughedelic/pisces'
-fundle plugin 'oh-my-fish/plugin-bang-bang'
-fundle plugin 'gazorby/fish-abbreviation-tips'
-fundle plugin 'oh-my-fish/plugin-foreign-env'
+fundle plugin edc/bass
+fundle plugin franciscolourenco/done
+fundle plugin jethrokuan/fzf
+fundle plugin laughedelic/pisces
+fundle plugin oh-my-fish/plugin-bang-bang
+fundle plugin gazorby/fish-abbreviation-tips
+fundle plugin oh-my-fish/plugin-foreign-env
 
 fundle init
 
-eval (keychain --eval --agents ssh -Q --quiet git general --nogui)
+eval (keychain --eval --agents ssh -Q --quiet git general gitmain --nogui)
 
 # Initialize zoxide
 zoxide init fish | source
+
+# Initialize navi
+navi widget fish | source
 
 # initialize starship prompt
 starship init fish | source

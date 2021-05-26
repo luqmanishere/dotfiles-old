@@ -3,6 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(require 'org-habit)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -22,8 +23,12 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 15)
-      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 26))
+(setq doom-font (font-spec :family "FiraCode Nerd Font"
+                          ;; :size 15
+                           )
+      doom-big-font (font-spec :family "FiraCode Nerd Font"
+                              ;; :size 26
+                               ))
       ;;doom-variable-pitch-font (font-spec :family "Overpass" :size 24)
       ;;doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
@@ -81,6 +86,22 @@
 
 ;; Centaur Tabs settings
 (after! centaur-tabs (centaur-tabs-group-by-projectile-project))
+
+(after! org
+  (map! :map evil-org-agenda-mode-map
+      :desc "Save all org buffers"
+      :m "s s" 'org-save-all-org-buffers)
+  (add-to-list 'org-modules 'org-habit)
+  )
+(setq org-agenda-files (list "~/org/genshin.org" "~/org/todo.org") )
+(setq org-log-done 'time)
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "INPROGRESS(i)" "|" "DONE(d)")
+        (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+        (sequence "|" "CANCELED(c)")))
+(setq org-todo-keyword-faces
+      '(("TODO" . org-warning) ("INPROGRESS" . (:foreground "blue" :weight bold)) ("DONE" . "green")
+        ("CANCELED" . (:foreground "red" :weight bold))))
 
 ;; Org Roam variables
 (setq org-roam-dailies-directory "daily/")

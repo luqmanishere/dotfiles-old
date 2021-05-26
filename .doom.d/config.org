@@ -1,0 +1,267 @@
+#+TITLE: Doom Emacs Config
+
+* Table of Contents :TOC:
+- [[#doom-emacs-config][Doom Emacs config]]
+  - [[#require-packages][Require packages]]
+  - [[#misc-configuration][Misc configuration]]
+  - [[#theme-customization][Theme Customization]]
+  - [[#centaur-tabs][Centaur Tabs]]
+  - [[#lsp][LSP]]
+  - [[#org-mode][Org mode]]
+  - [[#projectile][Projectile]]
+  - [[#tramp][tramp]]
+  - [[#word-wrap][Word wrap]]
+  - [[#yequake][Yequake]]
+
+* Doom Emacs config
+
+This is a literate config file for Doom Emacs.
+
+** Require packages
+Call in required packages before we set anything
+#+begin_src elisp
+(require 'org-habit)
+(require 'tramp)
+#+end_src
+
+** Misc configuration
+#+begin_src elisp
+(setq user-full-name "Luqmanul Hakim"
+      user-mail-address "luqmanulhakim1720@gmail.com")
+#+end_src
+
+*** Keybinds
+Evil escape which basically triggers escape on the sequence
+#+begin_src elisp
+(setq-default evil-escape-key-sequence "kj")
+#+end_src
+
+*** Keychain
+This manages ssh agent and keys for us. No need to mess around with environment variables:
+#+begin_src elisp
+(keychain-refresh-environment)
+#+end_src
+
+** Theme Customization
+*** Font
+For fonts, I find Fira Code to be very good looking with great ligatures.\
+I self patched them with NerdFont glyphs.
+Size is commented out due to HiDPI screen.
+#+begin_src elisp
+(setq doom-font (font-spec :family "FiraCode Nerd Font"
+                          ;; :size 15
+                           )
+      doom-big-font (font-spec :family "FiraCode Nerd Font"
+                              ;; :size 26
+                               ))
+#+end_src
+
+*** Theme
+Dracula is very easy on the eyes
+#+begin_src elisp
+(setq doom-theme 'doom-dracula)
+#+end_src
+
+*** Line Numbers
+I like them relative (even though I can't properly use them)
+#+begin_src elisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+*** Fringe
+The fringe is where the numbers and symbols are shown.
+#+begin_src elisp
+(fringe-mode 8)
+#+end_src
+
+** Centaur Tabs
+We group buffers by projectile projects:
+#+begin_src elisp
+(after! centaur-tabs (centaur-tabs-group-by-projectile-project))
+#+end_src
+
+** LSP
+*** lsp-clangd
+Sets priority for using clangd
+#+begin_src elisp
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+#+end_src
+
+Also some arguments for clangd:
+#+begin_src elisp
+(setq lsp-clients-clangd-args '("-j=3"
+                                "--background-index"
+                                "--clang-tidy"
+                                "--completion-style=detailed"
+                                "--header-insertion=never"))
+#+end_src
+
+*** Lua
+We use lua-language-server as the lsp server. I don't really code in lua,
+this is here just because of awesomewm
+#+begin_src elisp
+(setq lsp-clients-lua-language-server-bin "/usr/bin/lua-language-server")
+(setq lsp-clients-lua-language-server-main-location "/usr/share/lua-language-server/main.lua")
+#+end_src
+
+
+*** Rust
+#+begin_src elisp
+(setq lsp-rust-analyzer-diagnostics-disabled ["unresolved-proc-macro"])
+#+end_src
+
+** Org mode
+*** General Settings
+Set the org directory:
+#+begin_src elisp
+(setq org-directory "~/org/")
+#+end_src
+
+Syntax highlighting for code blocks:
+#+begin_src elisp
+(setq org-src-fontify-natively t)
+#+end_src
+
+This adds org-habit to org-modules, but I forgot what the code above it does:
+#+begin_src elisp
+(after! org
+  (map! :map evil-org-agenda-mode-map
+      :desc "Save all org buffers"
+      :m "s s" 'org-save-all-org-buffers)
+  (add-to-list 'org-modules 'org-habit)
+    )
+#+end_src
+
+*** Org Agenda and TODOs
+Set files for org agenda to search in:
+#+begin_src elisp
+(setq org-agenda-files (list "~/org/genshin.org" "~/org/todo.org") )
+#+end_src
+
+Set keywords for TODOs:
+#+begin_src elisp
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "INPROGRESS(i)" "|" "DONE(d)")
+        (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+        (sequence "|" "CANCELED(c)")))
+#+end_src
+
+And their different faces (coloring, basically):
+#+begin_src elisp
+(setq org-todo-keyword-faces
+      '(("TODO" . org-warning) ("INPROGRESS" . (:foreground "blue" :weight bold)) ("DONE" . "green")
+        ("CANCELED" . (:foreground "red" :weight bold))))
+#+end_src
+
+We want to log the time our TODOs are marked as completed:
+#+begin_src elisp
+(setq org-log-done 'time)
+#+end_src
+
+*** Org Roam
+Set where org-roam stores daily notes:
+#+begin_src elisp
+(setq org-roam-dailies-directory "daily/")
+#+end_src
+
+Set capture templates for daily notes:
+#+begin_src elisp
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         #'org-roam-capture--get-point
+         "* %?"
+         :file-name "daily/%<%Y-%m-%d>"
+         :head "#+title: %<%Y-%m-%d>\n\n")))
+#+end_src
+
+*** Deft
+Set the directory that Deft searches for notes:
+#+begin_src elisp
+(setq deft-directory "~/org/roam")
+#+end_src
+
+** Projectile
+Set project paths for projectile to search for projects
+#+begin_src elisp
+(setq projectile-project-search-path '("~/projects/"))
+#+end_src
+
+** tramp
+Allow management of yadm repo (dotfiles) from magit
+#+begin_src elisp
+(add-to-list 'tramp-methods
+ '("yadm"
+   (tramp-login-program "yadm")
+   (tramp-login-args (("enter")))
+   (tramp-login-env (("SHELL") ("/bin/sh")))
+   (tramp-remote-shell "/bin/sh")
+   (tramp-remote-shell-args ("-c"))))
+#+end_src
+** Word wrap
+#+begin_src elisp
+(setq-default fill-column 100)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (when (y-or-n-p "Auto Fill mode? ")
+              (turn-on-auto-fill))))
+#+end_src
+** Yequake
+Popups everywhere
+#+begin_src elisp
+(defun ea-popup-handler (app-name window-title x y w h)
+  ;; other stuff here
+  (when (gui-get-selection 'PRIMARY) (insert (gui-get-selection 'PRIMARY)))
+  (set-transient-map (let ((keymap (make-sparse-keymap)))
+                          (define-key keymap (kbd "DEL")   (lambda! (delete-region (point-min) (point-max))))
+                          (define-key keymap (kbd "C-SPC") (lambda! (delete-region (point-min) (point-max))))
+                          keymap)))
+
+(defun yequake-org-roam-capture (&optional goto keys)
+  "Call `org-capture' in a Yequake frame.
+Adds a function to `org-capture-after-finalize-hook' that closes
+the recently toggled Yequake frame and removes itself from the
+hook.
+Note: if another Yequake frame is toggled before the capture is
+finalized, when the capture is finalized, the wrong Yequake frame
+will be toggled."
+  (let* ((remove-hook-fn (lambda ()
+                           (remove-hook 'org-capture-after-finalize-hook #'yequake-retoggle))))
+    (add-hook 'org-capture-after-finalize-hook remove-hook-fn)
+    (add-hook 'org-capture-after-finalize-hook #'yequake-retoggle)
+    ;; MAYBE: Propose an `org-capture-switch-buffer-fn' variable that could be rebound here.
+
+    ;; NOTE: We override `org-switch-to-buffer-other-window' because
+    ;; it always uses `switch-to-buffer-other-window', and we want to
+    ;; display the template menu and capture buffer in the existing
+    ;; window rather than splitting the frame.
+    (cl-letf* (((symbol-function #'org-switch-to-buffer-other-window)
+                (symbol-function #'switch-to-buffer)))
+      (condition-case nil
+          (progn
+            (org-roam-capture goto keys)
+            ;; Be sure to return the "CAPTURE-" buffer, which is the current
+            ;; buffer at this point.
+            (current-buffer))
+        ((error quit)
+         ;; Capture aborted: remove the hook and hide the capture frame.
+         (remove-hook 'org-capture-after-finalize-hook #'yequake-retoggle)
+         (yequake-retoggle))))))
+
+
+
+(setq! yequake-frames
+   '(("org-roam-capture"
+      (buffer-fns . (yequake-org-roam-capture))
+      (width . 0.75)
+      (height . 0.5)
+      (alpha . 0.95)
+      (frame-parameters . ((undecorated . t)
+                           (skip-taskbar . t)
+                           (sticky . t))))
+    ("org-roam-find" .
+         ((width . 0.75)
+          (height . 0.5)
+          (alpha . 0.95)
+          (buffer-fns . (org-roam-find-file))
+          (frame-parameters . ((undecorated . t)))))))
+#+end_src

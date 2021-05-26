@@ -1,0 +1,18 @@
+input_device: /dev/input/by-path/platform-INT33D5:00-event
+# input_device: /dev/input/by-path/pci-0000:00:1f.0-platform-INT33D6:00-event # Dell XPS 9365
+
+modes:
+  laptop:
+    # - xinput enable "Wacom Pen and multitouch sensor Finger"
+    - xinput disable "Wacom HID 48EE Pen Pen (0xf49d1bcc)"
+    - xinput disable "Wacom HID 48EE Finger"
+    - xinput enable "AT Translated Set 2 keyboard"
+    - xinput enable "DLL08B0:01 06CB:CD7A Touchpad"
+    - systemctl --user stop screenrotator
+  tablet:
+    # - xinput disable "Wacom Pen and multitouch sensor Finger"
+    - xinput enable "Wacom HID 48EE Pen Pen (0xf49d1bcc)"
+    - xinput enable "Wacom HID 48EE Finger"
+    - xinput disable "AT Translated Set 2 keyboard"
+    - xinput disable "DLL08B0:01 06CB:CD7A Touchpad"
+    - systemctl --user start screenrotator
